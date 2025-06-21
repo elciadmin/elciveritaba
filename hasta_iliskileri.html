@@ -1232,61 +1232,58 @@
                         <span>Hayvan Sağlığında Mükemmellik</span>
                     </div>
                 </div>
+                <!-- YENİ NAVİGASYON YAPISI -->
                 <nav>
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
                         <i class="fas fa-bars"></i>
                     </button>
                     <ul id="mainMenu">
                         <li><a href="index.html">Ana Sayfa</a></li>
-                        
                         <li class="dropdown">
-                            <a href="hakkimizda.html">Hakkımızda</a>
+                            <a href="hakkimizda.html">Hakkımızda <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content">
-                                <a href="#elci-kimdir">Elçi Kimdir?</a>
-                                <a href="#ekibimiz">Ekibimiz</a>
-                                <a href="#klinigimiz">Kliniğimiz</a>
-                                <a href="#misyon-vizyon">Misyon & Vizyon</a>
-                                <a href="#degerlerimiz">Değerlerimiz</a>
+                                <a href="hakkimizda.html#elci-kimdir">Elçi Kimdir?</a>
+                                <a href="hakkimizda.html#ekibimiz">Ekibimiz</a>
+                                <a href="hakkimizda.html#klinik">Kliniğimiz</a>
+                                <a href="hakkimizda.html#misyon">Misyon & Vizyon</a>
+                                <a href="hakkimizda.html#degerler">Değerlerimiz</a>
                             </div>
                         </li>
-                        
                         <li class="dropdown">
-                            <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+                            <a href="hizmetlerimiz.html">Hizmetlerimiz <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content">
-                                <a href="#acil">Acil Veteriner Hizmetleri</a>
-                                <a href="#koruyucu">Koruyucu Hekimlik</a>
-                                <a href="#cerrahi">Cerrahi Operasyonlar</a>
-                                <a href="#agiz-dis">Ağız ve Diş Sağlığı</a>
-                                <a href="#ic-hastaliklari">İç Hastalıkları</a>
-                                <a href="#dogum">Doğum ve Jinekoloji</a>
-                                <a href="#fizik-tedavi">Fizik Tedavi</a>
-                                <a href="#konaklama">Konaklama Hizmetleri</a>
+                                <a href="hizmetlerimiz.html#acil">Acil Veteriner Hizmetleri</a>
+                                <a href="hizmetlerimiz.html#koruyucu">Koruyucu Hekimlik</a>
+                                <a href="hizmetlerimiz.html#cerrahi">Cerrahi Operasyonlar</a>
+                                <a href="hizmetlerimiz.html#dis">Ağız ve Diş Sağlığı</a>
+                                <a href="hizmetlerimiz.html#ic-hastaliklar">İç Hastalıkları</a>
+                                <a href="hizmetlerimiz.html#dogum">Doğum ve Jinekoloji</a>
+                                <a href="hizmetlerimiz.html#fizik-tedavi">Fizik Tedavi</a>
+                                <a href="hizmetlerimiz.html#konaklama">Konaklama Hizmetleri</a>
                             </div>
                         </li>
-                        
                         <li class="dropdown">
-                            <a href="blog.html">Blog</a>
+                            <a href="blog.html">Blog <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content">
-                                <a href="#">Evcil Hayvan Rehberleri</a>
-                                <a href="#">Sağlık & Tedavi Rehberi</a>
-                                <a href="#">Kliniğimizden Haberler</a>
+                                <a href="blog.html#rehberler">Evcil Hayvan Rehberleri</a>
+                                <a href="blog.html#saglik">Sağlık & Tedavi Rehberi</a>
+                                <a href="blog.html#haberler">Kliniğimizden Haberler</a>
                             </div>
                         </li>
-                        
                         <li class="dropdown">
-                            <a href="#">SSS</a>
+                            <a href="sss.html">SSS <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content">
-                                <a href="#">Fiyat & Ödeme Programlarımız</a>
-                                <a href="#">Hizmet Süreçleri</a>
-                                <a href="#">Acil Durumlar</a>
+                                <a href="sss.html#fiyat">Fiyat & Ödeme</a>
+                                <a href="sss.html#surec">Hizmet Süreçleri</a>
+                                <a href="sss.html#acil">Acil Durumlar</a>
                             </div>
                         </li>
-                        
                         <li class="dropdown">
-                            <a href="hasta-iliskileri.html" class="active">Hasta İlişkileri</a>
+                            <a href="hasta-iliskileri.html" class="active">Hasta İlişkileri <i class="fas fa-chevron-down"></i></a>
                             <div class="dropdown-content">
                                 <a href="#online-randevu">Online Randevu</a>
                                 <a href="#memnuniyet-anketi">Memnuniyet Anketi</a>
+                                <a href="#google-yorumlar">Google Yorumları</a>
                                 <a href="#basari-hikayeleri">Başarı Hikayeleri</a>
                                 <a href="#sikayet-oneri">Şikayet & Öneri</a>
                             </div>
@@ -1940,6 +1937,33 @@
                     e.preventDefault();
                     const dropdown = this.parentElement;
                     dropdown.classList.toggle('active');
+                    
+                    // Diğer dropdown'ları kapat
+                    document.querySelectorAll('.dropdown').forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Sayfa içi linkler için smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Mobilde menüyü kapat
+                    if (window.innerWidth <= 992) {
+                        mainMenu.classList.remove('show');
+                    }
                 }
             });
         });
