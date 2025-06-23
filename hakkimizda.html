@@ -1297,6 +1297,20 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Düzeltme: Dropdown stilleri */
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f0f7ff;
+            color: var(--primary-color);
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -1372,12 +1386,13 @@
                         </li>
                         
                         <li class="dropdown">
+                            <!-- DÜZELTME: Hasta İlişkileri linki ve alt menüleri güncellendi -->
                             <a href="hasta-iliskileri.html">Hasta İlişkileri</a>
                             <div class="dropdown-content">
-                                <a href="#">Online Randevu</a>
-                                <a href="#">Memnuniyet Anketi</a>
-                                <a href="#">Başarı Hikayeleri</a>
-                                <a href="#">Şikayet & Öneri</a>
+                                <a href="hasta-iliskileri.html#online-randevu">Online Randevu</a>
+                                <a href="hasta-iliskileri.html#memnuniyet-anketi">Memnuniyet Anketi</a>
+                                <a href="hasta-iliskileri.html#basari-hikayeleri">Başarı Hikayeleri</a>
+                                <a href="hasta-iliskileri.html#sikayet-oneri">Şikayet & Öneri</a>
                             </div>
                         </li>
                     </ul>
@@ -2057,6 +2072,14 @@
                         behavior: 'smooth'
                     });
                 }
+            });
+        });
+        
+        // Hasta İlişkileri bağlantıları için güvenlik önlemi
+        document.querySelectorAll('a[href="hasta-iliskileri.html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'hasta-iliskileri.html';
             });
         });
     </script>
