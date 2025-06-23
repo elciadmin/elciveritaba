@@ -72,11 +72,15 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
         .section-title h2 {
             position: relative;
             display: inline-block;
             padding-bottom: 15px;
-            opacity: 0;
         }
         
         .section-title h2::after {
@@ -94,7 +98,6 @@
         .page-header h1 {
             position: relative;
             padding-bottom: 15px;
-            opacity: 0;
         }
         
         .page-header h1::after {
@@ -1386,7 +1389,6 @@
                         </li>
                         
                         <li class="dropdown">
-                            <!-- DÜZELTME: Hasta İlişkileri linki ve alt menüleri güncellendi -->
                             <a href="hasta-iliskileri.html">Hasta İlişkileri</a>
                             <div class="dropdown-content">
                                 <a href="hasta-iliskileri.html#online-randevu">Online Randevu</a>
@@ -2072,14 +2074,6 @@
                         behavior: 'smooth'
                     });
                 }
-            });
-        });
-        
-        // Hasta İlişkileri bağlantıları için güvenlik önlemi
-        document.querySelectorAll('a[href="hasta-iliskileri.html"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'hasta-iliskileri.html';
             });
         });
     </script>
