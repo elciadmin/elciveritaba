@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasta İlişkileri | Elçi Veteriner Kliniği</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Elçi Veteriner | Hasta İlişkileri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6a0ea1;
-            --secondary-color: #10b3d1;
-            --accent-color: #f39c12;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --white: #ffffff;
-            --gray: #6c757d;
-            --emergency-red: #e74c3c;
-            --success-green: #2ecc71;
+            --primary-color: #6a0ea1; /* Mor */
+            --secondary-color: #10b3d1; /* Mavi */
+            --accent-color: #f39c12; /* Turuncu */
+            --light-color: #f8f9fa; /* Açık Gri */
+            --dark-color: #343a40; /* Koyu Gri */
+            --white: #ffffff; /* Beyaz */
+            --gray: #6c757d; /* Gri */
+            --emergency-red: #e74c3c; /* Acil Durum Kırmızısı */
+            --success-green: #2ecc71; /* Başarı Yeşili */
         }
         
         * {
@@ -54,6 +54,59 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+        
+        /* Animasyonlar */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            opacity: 0;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .page-header h1 {
+            position: relative;
+            padding-bottom: 15px;
+            opacity: 0;
+        }
+        
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
         
         /* Header Styles */
@@ -99,7 +152,7 @@
         }
         
         .header-main {
-            padding: 10px 0;
+            padding: 15px 0;
         }
         
         .header-main .container {
@@ -202,23 +255,6 @@
             transform: translateY(0);
         }
         
-        .dropdown-content a {
-            color: var(--dark-color);
-            padding: 12px 20px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        
-        .dropdown-content a:hover {
-            background-color: #f0f7ff;
-            color: var(--primary-color);
-            padding-left: 25px;
-            border-left: 3px solid var(--secondary-color);
-        }
-        
         .dropdown > a::after {
             content: '\f078';
             font-family: 'Font Awesome 5 Free';
@@ -241,7 +277,6 @@
             color: white;
             text-align: center;
             position: relative;
-            margin-top: 80px;
         }
         
         .page-header h1 {
@@ -254,7 +289,7 @@
         .page-header p {
             font-size: 20px;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 20px auto 0;
             opacity: 0.9;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
@@ -264,6 +299,7 @@
             padding: 15px 0;
             font-size: 14px;
             background-color: #f0f7ff;
+            margin-top: 80px;
         }
         
         .breadcrumb a {
@@ -279,8 +315,8 @@
             color: var(--gray);
         }
         
-        /* Section Styles */
-        .section {
+        /* Services Section */
+        .services-section {
             padding: 80px 0;
         }
         
@@ -289,314 +325,285 @@
             margin-bottom: 50px;
         }
         
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-color);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 3px;
-            background: var(--secondary-color);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
         .section-title p {
             max-width: 700px;
-            margin: 15px auto 0;
+            margin: 30px auto 0;
             color: var(--gray);
         }
         
-        /* Online Appointment Section */
-        .appointment-section {
-            background-color: white;
-        }
-        
-        .appointment-container {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 40px;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
         
-        .appointment-form {
+        .service-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .service-btn:hover {
+            background-color: #0e9bb8;
+            transform: translateY(-3px);
+        }
+        
+        /* Appointment Form */
+        .appointment-section {
+            background-color: #f0f7ff;
+            padding: 80px 0;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            flex: 1 0 300px;
+            padding: 0 15px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--dark-color);
         }
         
-        .form-control {
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
             width: 100%;
-            padding: 14px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             transition: all 0.3s ease;
         }
         
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(106, 14, 161, 0.1);
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--secondary-color);
             outline: none;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            box-shadow: 0 0 0 3px rgba(16, 179, 209, 0.2);
         }
         
         .submit-btn {
-            background: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
-            padding: 15px 40px;
-            border-radius: 8px;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
             font-size: 18px;
-            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: block;
-            width: 100%;
-            margin-top: 10px;
+            margin: 30px auto 0;
         }
         
         .submit-btn:hover {
-            background: #0d9cb8;
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
-        .appointment-info {
-            background: #f0f7ff;
-            border-radius: 15px;
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
             padding: 30px;
-            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
         }
         
-        .info-box {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #e0e0e0;
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--secondary-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
         }
         
-        .info-box:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+        .testimonial-content {
+            padding-top: 30px;
         }
         
-        .info-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .testimonial-author {
             display: flex;
             align-items: center;
+            margin-top: 20px;
         }
         
-        .info-box h3 i {
-            margin-right: 10px;
-            font-size: 24px;
-            color: var(--secondary-color);
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
         }
         
-        /* Satisfaction Survey Section */
-        .survey-section {
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .author-info span {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
             background-color: #f8f9fa;
         }
         
-        .survey-container {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .faq-container {
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .survey-question {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
         }
         
-        .survey-question:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        
-        .survey-question h3 {
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        
-        .rating-container {
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
-        }
-        
-        .rating-option {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
         
-        .rating-option input[type="radio"] {
-            display: none;
+        .faq-question::after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
         }
         
-        .rating-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #f0f7ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--dark-color);
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
         }
         
-        .rating-option input[type="radio"]:checked + .rating-circle {
-            background: var(--secondary-color);
-            color: white;
-            transform: scale(1.1);
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
         
-        .rating-option:hover .rating-circle {
-            background: #d8e9f5;
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px;
+            max-height: 500px;
         }
         
-        /* Google Yorumlar Bölümü */
-        .google-reviews {
-            margin-top: 50px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-top: 4px solid var(--accent-color);
-        }
-        
-        .review-form {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-        
-        .stars {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        
-        .star {
-            font-size: 24px;
-            color: #ddd;
-            cursor: pointer;
-            transition: color 0.2s;
-            margin-right: 5px;
-        }
-        
-        .star.selected {
-            color: #ffc107;
-        }
-        
-        .review-list {
-            margin-top: 30px;
-        }
-        
-        .review-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--secondary-color);
-        }
-        
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .review-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #e6f2ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-        
-        .review-meta h4 {
-            margin-bottom: 5px;
-        }
-        
-        .review-date {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        .review-stars {
-            color: #ffc107;
-            margin-bottom: 10px;
-        }
-        
-        /* Success Stories Section */
-        .stories-section {
-            background-color: white;
+        /* Success Stories */
+        .success-stories-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
         }
         
         .stories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 40px;
         }
         
         .story-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
         
         .story-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .story-img {
-            height: 250px;
+            height: 200px;
             overflow: hidden;
         }
         
@@ -604,7 +611,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.5s ease;
+            transition: transform 0.5s ease;
         }
         
         .story-card:hover .story-img img {
@@ -620,79 +627,129 @@
             margin-bottom: 15px;
         }
         
-        .story-pet {
+        .story-content .pet-info {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
         
-        .story-pet img {
-            width: 50px;
-            height: 50px;
+        .pet-info img {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-            border: 2px solid var(--secondary-color);
+            margin-right: 10px;
         }
         
-        .story-tag {
-            display: inline-block;
-            background: #e6f2ff;
-            color: var(--primary-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        .story-quote {
-            background: #f8f9fa;
-            border-left: 4px solid var(--secondary-color);
-            padding: 15px;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        
-        .story-quote i {
-            color: var(--secondary-color);
-            margin-right: 5px;
+        .pet-info span {
+            font-weight: 500;
+            color: var(--gray);
         }
         
         /* Feedback Section */
         .feedback-section {
-            background-color: #f8f9fa;
+            padding: 80px 0;
         }
         
         .feedback-container {
             max-width: 800px;
             margin: 0 auto;
-        }
-        
-        .feedback-form {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .radio-group {
+        .feedback-tabs {
             display: flex;
-            gap: 20px;
-            margin-top: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
         }
         
-        .radio-option {
+        .feedback-tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .feedback-tab.active {
+            color: var(--primary-color);
+        }
+        
+        .feedback-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .feedback-content {
+            display: none;
+        }
+        
+        .feedback-content.active {
+            display: block;
+        }
+        
+        .feedback-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        /* Survey Section */
+        .survey-section {
+            padding: 80px 0;
+            background-color: #f0f7ff;
+        }
+        
+        .survey-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .survey-question {
+            margin-bottom: 30px;
+        }
+        
+        .survey-question h4 {
+            margin-bottom: 15px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        
+        .option-label {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .radio-option input[type="radio"] {
-            margin-right: 8px;
+        .option-label:hover {
+            border-color: var(--secondary-color);
+            background-color: rgba(16, 179, 209, 0.05);
+        }
+        
+        .option-label input[type="radio"] {
+            margin-bottom: 8px;
+        }
+        
+        .option-text {
+            font-size: 14px;
+            text-align: center;
         }
         
         /* Footer */
@@ -794,279 +851,7 @@
             transform: translateY(-3px);
         }
         
-        /* Acil Arama Butonu */
-        .emergency-call {
-            position: fixed;
-            bottom: 70px;
-            right: 30px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
-            z-index: 999;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        
-        .emergency-call:hover {
-            transform: scale(1.1);
-        }
-        
-        .emergency-call::after {
-            content: 'Ara: 0332 322 32 20';
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e74c3c;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .emergency-call:hover::after {
-            opacity: 1;
-        }
-        
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 230px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            z-index: 999;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .back-to-top.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .back-to-top:hover {
-            transform: translateY(-5px);
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
-        }
-        
-        /* Canlı Sohbet Butonu */
-        .chat-bubble {
-            position: fixed;
-            bottom: 150px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--primary-color), #4a0c7a);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 5px 20px rgba(106, 14, 161, 0.4);
-            z-index: 999;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse-chat 2s infinite;
-        }
-        
-        .chat-bubble:hover {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #5a0d8c, #3a0c5e);
-        }
-        
-        .chat-bubble::after {
-            content: 'Canlı Destek';
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .chat-bubble:hover::after {
-            opacity: 1;
-        }
-        
-        @keyframes pulse-chat {
-            0% { box-shadow: 0 0 0 0 rgba(106, 14, 161, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(106, 14, 161, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(106, 14, 161, 0); }
-        }
-        
-        /* Canlı Sohbet Penceresi */
-        .chat-window {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 450px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-        
-        .chat-window.active {
-            display: flex;
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .chat-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .chat-header h3 {
-            color: white;
-            margin: 0;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .chat-header h3 i {
-            margin-right: 10px;
-        }
-        
-        .close-chat {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .close-chat:hover {
-            transform: rotate(90deg);
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-        
-        .message {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .message.bot {
-            align-items: flex-start;
-        }
-        
-        .message.user {
-            align-items: flex-end;
-        }
-        
-        .message-content {
-            max-width: 80%;
-            padding: 12px 15px;
-            border-radius: 15px;
-            position: relative;
-        }
-        
-        .message.bot .message-content {
-            background: #e6f2ff;
-            border-bottom-left-radius: 5px;
-            color: #333;
-        }
-        
-        .message.user .message-content {
-            background: var(--secondary-color);
-            color: white;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .message-time {
-            font-size: 11px;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-        
-        .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-            background: white;
-        }
-        
-        .chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            outline: none;
-            font-size: 14px;
-        }
-        
-        .send-button {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .send-button:hover {
-            background: #0d9cb8;
-            transform: scale(1.05);
-        }
-        
-        /* Responsive Düzenlemeler */
+        /* Responsive Styles */
         @media (max-width: 992px) {
             nav ul {
                 display: none;
@@ -1098,37 +883,8 @@
                 font-size: 36px;
             }
             
-            .page-header {
-                padding: 140px 0 60px;
-            }
-            
-            /* Mobil için dropdown ayarları */
-            .dropdown > a::after {
-                position: absolute;
-                right: 20px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            
-            .dropdown-content {
-                position: static;
-                display: none;
-                box-shadow: none;
-                padding-left: 20px;
-                opacity: 1;
-                transform: none;
-            }
-            
-            .dropdown.active .dropdown-content {
-                display: block;
-            }
-            
-            .dropdown.active > a::after {
-                transform: rotate(180deg) translateY(50%);
-            }
-            
-            .appointment-container {
-                grid-template-columns: 1fr;
+            .options-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -1143,7 +899,7 @@
             }
             
             .page-header {
-                padding: 120px 0 50px;
+                padding: 140px 0 60px;
             }
             
             .page-header h1 {
@@ -1154,59 +910,87 @@
                 font-size: 18px;
             }
             
-            .emergency-call {
-                bottom: 60px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
+            .form-group {
+                flex: 1 0 100%;
             }
             
-            .chat-bubble {
-                bottom: 130px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
+            .feedback-tabs {
+                flex-direction: column;
             }
             
-            .back-to-top {
-                bottom: 200px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
+            .feedback-tab {
+                border-bottom: 1px solid #eee;
             }
             
-            .section-title h2 {
-                font-size: 28px;
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .appointment-form, .survey-container, .feedback-form {
-                padding: 25px;
-            }
-            
-            .rating-container {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            .rating-option {
-                flex: 1 0 20%;
-            }
-            
-            .chat-window {
-                width: calc(100% - 40px);
-                height: 70vh;
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-            }
+        }
+        
+        /* Animasyonlar için ek */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* İçindekiler Menüsü */
+        .contents-menu {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        
+        .contents-menu h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .menu-item:hover a {
+            color: white;
+        }
+        
+        .menu-item i {
+            font-size: 20px;
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .menu-item:hover i {
+            color: white;
+        }
+        
+        .menu-item a {
+            font-weight: 500;
         }
     </style>
 </head>
@@ -1232,58 +1016,61 @@
                         <span>Hayvan Sağlığında Mükemmellik</span>
                     </div>
                 </div>
-                <!-- YENİ NAVİGASYON YAPISI -->
                 <nav>
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
                         <i class="fas fa-bars"></i>
                     </button>
                     <ul id="mainMenu">
                         <li><a href="index.html">Ana Sayfa</a></li>
+                        
                         <li class="dropdown">
-                            <a href="hakkimizda.html">Hakkımızda <i class="fas fa-chevron-down"></i></a>
+                            <a href="hakkimizda.html">Hakkımızda</a>
                             <div class="dropdown-content">
-                                <a href="hakkimizda.html#elci-kimdir">Elçi Kimdir?</a>
-                                <a href="hakkimizda.html#ekibimiz">Ekibimiz</a>
-                                <a href="hakkimizda.html#klinik">Kliniğimiz</a>
-                                <a href="hakkimizda.html#misyon">Misyon & Vizyon</a>
-                                <a href="hakkimizda.html#degerler">Değerlerimiz</a>
+                                <a href="#elci-kimdir">Elçi Kimdir?</a>
+                                <a href="#ekibimiz">Ekibimiz</a>
+                                <a href="#klinik">Kliniğimiz</a>
+                                <a href="#misyon-vizyon">Misyon & Vizyon</a>
+                                <a href="#degerler">Değerlerimiz</a>
                             </div>
                         </li>
+                        
                         <li class="dropdown">
-                            <a href="hizmetlerimiz.html">Hizmetlerimiz <i class="fas fa-chevron-down"></i></a>
+                            <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
                             <div class="dropdown-content">
-                                <a href="hizmetlerimiz.html#acil">Acil Veteriner Hizmetleri</a>
-                                <a href="hizmetlerimiz.html#koruyucu">Koruyucu Hekimlik</a>
-                                <a href="hizmetlerimiz.html#cerrahi">Cerrahi Operasyonlar</a>
-                                <a href="hizmetlerimiz.html#dis">Ağız ve Diş Sağlığı</a>
-                                <a href="hizmetlerimiz.html#ic-hastaliklar">İç Hastalıkları</a>
-                                <a href="hizmetlerimiz.html#dogum">Doğum ve Jinekoloji</a>
-                                <a href="hizmetlerimiz.html#fizik-tedavi">Fizik Tedavi</a>
-                                <a href="hizmetlerimiz.html#konaklama">Konaklama Hizmetleri</a>
+                                <a href="#">Acil Veteriner Hizmetleri</a>
+                                <a href="#">Koruyucu Hekimlik</a>
+                                <a href="#">Cerrahi Operasyonlar</a>
+                                <a href="#">Ağız ve Diş Sağlığı</a>
+                                <a href="#">İç Hastalıkları</a>
+                                <a href="#">Doğum ve Jinekoloji</a>
+                                <a href="#">Fizik Tedavi ve Rehabilitasyon Hizmetleri</a>
+                                <a href="#">Konaklama Hizmetleri</a>
                             </div>
                         </li>
+                        
                         <li class="dropdown">
-                            <a href="blog.html">Blog <i class="fas fa-chevron-down"></i></a>
+                            <a href="blog.html">Blog</a>
                             <div class="dropdown-content">
-                                <a href="blog.html#rehberler">Evcil Hayvan Rehberleri</a>
-                                <a href="blog.html#saglik">Sağlık & Tedavi Rehberi</a>
-                                <a href="blog.html#haberler">Kliniğimizden Haberler</a>
+                                <a href="#">Evcil Hayvan Rehberleri</a>
+                                <a href="#">Sağlık & Tedavi Rehberi</a>
+                                <a href="#">Kliniğimizden Haberler</a>
                             </div>
                         </li>
+                        
                         <li class="dropdown">
-                            <a href="sss.html">SSS <i class="fas fa-chevron-down"></i></a>
+                            <a href="sss.html">SSS</a>
                             <div class="dropdown-content">
-                                <a href="sss.html#fiyat">Fiyat & Ödeme</a>
-                                <a href="sss.html#surec">Hizmet Süreçleri</a>
-                                <a href="sss.html#acil">Acil Durumlar</a>
+                                <a href="#">Fiyat & Ödeme Programlarımız</a>
+                                <a href="#">Hizmet Süreçleri</a>
+                                <a href="#">Acil Durumlar</a>
                             </div>
                         </li>
+                        
                         <li class="dropdown">
-                            <a href="hasta-iliskileri.html" class="active">Hasta İlişkileri <i class="fas fa-chevron-down"></i></a>
+                            <a href="hasta-iliskileri.html" class="active">Hasta İlişkileri</a>
                             <div class="dropdown-content">
                                 <a href="#online-randevu">Online Randevu</a>
                                 <a href="#memnuniyet-anketi">Memnuniyet Anketi</a>
-                                <a href="#google-yorumlar">Google Yorumları</a>
                                 <a href="#basari-hikayeleri">Başarı Hikayeleri</a>
                                 <a href="#sikayet-oneri">Şikayet & Öneri</a>
                             </div>
@@ -1298,7 +1085,7 @@
     <section class="page-header">
         <div class="container">
             <h1>Hasta İlişkileri</h1>
-            <p>Evcil dostlarınız için en iyi hizmet deneyimini sağlamak için buradayız</p>
+            <p>Evcil dostunuz için en iyi hizmet deneyimi</p>
         </div>
     </section>
 
@@ -1309,250 +1096,285 @@
         </div>
     </div>
 
-    <!-- Online Appointment Section -->
-    <section class="section appointment-section" id="online-randevu">
+    <!-- Services Section -->
+    <section class="services-section">
         <div class="container">
             <div class="section-title">
-                <h2>Online Randevu</h2>
-                <p>Evcil dostunuz için kolayca randevu alın, zaman kaybetmeyin</p>
+                <h2>Hasta Hizmetlerimiz</h2>
+                <p>Evcil dostunuz için sunduğumuz özel hizmetler</p>
             </div>
             
-            <div class="appointment-container">
-                <div class="appointment-form">
-                    <form id="appointmentForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Adınız Soyadınız *</label>
-                                <input type="text" id="name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Telefon Numaranız *</label>
-                                <input type="tel" id="phone" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">E-posta Adresiniz</label>
-                                <input type="email" id="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="pet-type">Evcil Hayvan Türü *</label>
-                                <select id="pet-type" class="form-control" required>
-                                    <option value="">Seçiniz</option>
-                                    <option value="dog">Köpek</option>
-                                    <option value="cat">Kedi</option>
-                                    <option value="bird">Kuş</option>
-                                    <option value="other">Diğer</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="service">Hizmet Türü *</label>
-                                <select id="service" class="form-control" required>
-                                    <option value="">Seçiniz</option>
-                                    <option value="muayene">Genel Muayene</option>
-                                    <option value="asilama">Aşılama</option>
-                                    <option value="cerrahi">Cerrahi Operasyon</option>
-                                    <option value="dental">Diş Tedavisi</option>
-                                    <option value="laboratuvar">Laboratuvar Testleri</option>
-                                    <option value="fizik-tedavi">Fizik Tedavi</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="doctor">Tercih Ettiğiniz Veteriner Hekim</label>
-                                <select id="doctor" class="form-control">
-                                    <option value="">Fark Etmez</option>
-                                    <option value="dr-mehmet">Dr. Mehmet Elçi</option>
-                                    <option value="dr-ayse">Dr. Ayşe Yılmaz</option>
-                                    <option value="dr-ali">Dr. Ali Demir</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="date">Tercih Edilen Tarih *</label>
-                                <input type="date" id="date" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="time">Tercih Edilen Saat *</label>
-                                <select id="time" class="form-control" required>
-                                    <option value="">Seçiniz</option>
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="14:00">14:00</option>
-                                    <option value="15:00">15:00</option>
-                                    <option value="16:00">16:00</option>
-                                    <option value="17:00">17:00</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="notes">Ek Notlar (İsteğe Bağlı)</label>
-                            <textarea id="notes" class="form-control" rows="4"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Randevu Talebini Gönder</button>
-                    </form>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Online Randevu</h3>
+                        <p>Kliniğimize gelmeden önce kolayca randevu alın, zaman kaybetmeyin. 7/24 randevu sistemimizle istediğiniz zaman randevu oluşturabilirsiniz.</p>
+                        <a href="#online-randevu" class="service-btn">Randevu Al</a>
+                    </div>
                 </div>
                 
-                <div class="appointment-info">
-                    <div class="info-box">
-                        <h3><i class="fas fa-info-circle"></i> Randevu Bilgileri</h3>
-                        <p>Randevularınızı online olarak kolayca oluşturabilirsiniz. Randevu talebiniz tarafımıza ulaştıktan sonra en kısa sürede sizinle iletişime geçeceğiz.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-medical"></i>
                     </div>
-                    
-                    <div class="info-box">
-                        <h3><i class="fas fa-clock"></i> Çalışma Saatleri</h3>
-                        <p><strong>Pazartesi - Cumartesi:</strong> 08:00 - 19:00<br>
-                        <strong>Pazar:</strong> Sadece acil durumlar için hizmet verilmektedir</p>
+                    <div class="service-content">
+                        <h3>Hasta Takip Sistemi</h3>
+                        <p>Evcil dostunuzun tüm sağlık bilgileri dijital ortamda saklanır. Tedavi süreçlerini ve aşı takvimlerini online olarak takip edebilirsiniz.</p>
+                        <a href="#" class="service-btn">Hasta Takip</a>
                     </div>
-                    
-                    <div class="info-box">
-                        <h3><i class="fas fa-phone-alt"></i> Acil Durumlar</h3>
-                        <p>Evcil dostunuz acil bir durumla karşı karşıyaysa lütfen hemen arayın:<br>
-                        <strong><a href="tel:03323223220">0332 322 32 20</a></strong></p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>7/24 Destek Hattı</h3>
+                        <p>Acıl durumlarda veya sorularınız için 7/24 ulaşabileceğiniz destek hattımız. Veteriner hekimlerimiz sizlere en hızlı şekilde yardımcı olur.</p>
+                        <a href="tel:03323223220" class="service-btn">Ara: 0332 322 32 20</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Satisfaction Survey Section -->
-    <section class="section survey-section" id="memnuniyet-anketi">
+    <!-- Contents Menu -->
+    <div class="contents-menu">
+        <div class="container">
+            <h3>Hasta İlişkileri Hizmetlerimiz</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <a href="#online-randevu">Online Randevu</a>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-clipboard-check"></i>
+                    <a href="#memnuniyet-anketi">Memnuniyet Anketi</a>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-star"></i>
+                    <a href="#basari-hikayeleri">Başarı Hikayeleri</a>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-comments"></i>
+                    <a href="#sikayet-oneri">Şikayet & Öneri</a>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <a href="#sss">Sık Sorulan Sorular</a>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-user-friends"></i>
+                    <a href="#musteri-memnuniyeti">Müşteri Memnuniyeti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Online Randevu -->
+    <section class="appointment-section" id="online-randevu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Online Randevu</h2>
+                <p>Hızlı ve kolay randevu almak için formu doldurun</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="appointmentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Adınız Soyadınız</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon Numaranız</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-posta Adresiniz</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="petType">Evcil Hayvan Türü</label>
+                            <select id="petType" required>
+                                <option value="">Seçiniz</option>
+                                <option value="dog">Köpek</option>
+                                <option value="cat">Kedi</option>
+                                <option value="bird">Kuş</option>
+                                <option value="other">Diğer</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="petName">Evcil Hayvan Adı</label>
+                            <input type="text" id="petName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">İlgilendiğiniz Hizmet</label>
+                            <select id="service" required>
+                                <option value="">Seçiniz</option>
+                                <option value="checkup">Genel Muayene</option>
+                                <option value="vaccine">Aşı</option>
+                                <option value="surgery">Cerrahi Operasyon</option>
+                                <option value="dental">Diş Tedavisi</option>
+                                <option value="grooming">Tıraş & Bakım</option>
+                                <option value="other">Diğer</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Tercih Ettiğiniz Tarih</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Tercih Ettiğiniz Saat</label>
+                            <input type="time" id="time" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Ek Bilgiler (İsteğe bağlı)</label>
+                        <textarea id="message" rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Randevu Oluştur</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memnuniyet Anketi -->
+    <section class="survey-section" id="memnuniyet-anketi">
         <div class="container">
             <div class="section-title">
                 <h2>Memnuniyet Anketi</h2>
-                <p>Hizmet kalitemizi artırmak için görüşlerinize ihtiyacımız var</p>
+                <p>Deneyiminizi bizimle paylaşın, hizmet kalitemizi artıralım</p>
             </div>
             
             <div class="survey-container">
-                <form id="satisfactionForm">
+                <form id="satisfactionSurvey">
                     <div class="form-group">
-                        <label for="visit-date">Son Kliniğimizi Ziyaret Tarihi</label>
-                        <input type="date" id="visit-date" class="form-control">
+                        <label for="surveyName">Adınız Soyadınız (İsteğe Bağlı)</label>
+                        <input type="text" id="surveyName">
                     </div>
                     
                     <div class="survey-question">
-                        <h3>1. Kliniğimizin temizliği ve hijyeni konusunda ne düşünüyorsunuz?</h3>
-                        <div class="rating-container">
-                            <label class="rating-option">
-                                <input type="radio" name="cleanliness" value="1">
-                                <div class="rating-circle">1</div>
-                                <span>Çok Kötü</span>
+                        <h4>1. Kliniğimizdeki genel deneyiminizi nasıl değerlendirirsiniz?</h4>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="experience" value="1" required>
+                                <span class="option-text">Çok Kötü</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="cleanliness" value="2">
-                                <div class="rating-circle">2</div>
-                                <span>Kötü</span>
+                            <label class="option-label">
+                                <input type="radio" name="experience" value="2">
+                                <span class="option-text">Kötü</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="cleanliness" value="3">
-                                <div class="rating-circle">3</div>
-                                <span>Orta</span>
+                            <label class="option-label">
+                                <input type="radio" name="experience" value="3">
+                                <span class="option-text">Orta</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="cleanliness" value="4">
-                                <div class="rating-circle">4</div>
-                                <span>İyi</span>
+                            <label class="option-label">
+                                <input type="radio" name="experience" value="4">
+                                <span class="option-text">İyi</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="cleanliness" value="5">
-                                <div class="rating-circle">5</div>
-                                <span>Çok İyi</span>
+                            <label class="option-label">
+                                <input type="radio" name="experience" value="5">
+                                <span class="option-text">Mükemmel</span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="survey-question">
-                        <h3>2. Veteriner hekimimizin bilgi ve tecrübesini nasıl değerlendirirsiniz?</h3>
-                        <div class="rating-container">
-                            <label class="rating-option">
-                                <input type="radio" name="knowledge" value="1">
-                                <div class="rating-circle">1</div>
-                                <span>Çok Kötü</span>
+                        <h4>2. Veteriner hekimimizin bilgi ve ilgisi nasıldı?</h4>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="knowledge" value="1" required>
+                                <span class="option-text">Çok Kötü</span>
                             </label>
-                            <label class="rating-option">
+                            <label class="option-label">
                                 <input type="radio" name="knowledge" value="2">
-                                <div class="rating-circle">2</div>
-                                <span>Kötü</span>
+                                <span class="option-text">Kötü</span>
                             </label>
-                            <label class="rating-option">
+                            <label class="option-label">
                                 <input type="radio" name="knowledge" value="3">
-                                <div class="rating-circle">3</div>
-                                <span>Orta</span>
+                                <span class="option-text">Orta</span>
                             </label>
-                            <label class="rating-option">
+                            <label class="option-label">
                                 <input type="radio" name="knowledge" value="4">
-                                <div class="rating-circle">4</div>
-                                <span>İyi</span>
+                                <span class="option-text">İyi</span>
                             </label>
-                            <label class="rating-option">
+                            <label class="option-label">
                                 <input type="radio" name="knowledge" value="5">
-                                <div class="rating-circle">5</div>
-                                <span>Çok İyi</span>
+                                <span class="option-text">Mükemmel</span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="survey-question">
-                        <h3>3. Hizmet süreçlerimiz (randevu, muayene, tedavi) hakkındaki düşünceleriniz nelerdir?</h3>
-                        <div class="rating-container">
-                            <label class="rating-option">
-                                <input type="radio" name="process" value="1">
-                                <div class="rating-circle">1</div>
-                                <span>Çok Kötü</span>
+                        <h4>3. Personelimizin ilgisi ve yardımseverliği nasıldı?</h4>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="staff" value="1" required>
+                                <span class="option-text">Çok Kötü</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="process" value="2">
-                                <div class="rating-circle">2</div>
-                                <span>Kötü</span>
+                            <label class="option-label">
+                                <input type="radio" name="staff" value="2">
+                                <span class="option-text">Kötü</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="process" value="3">
-                                <div class="rating-circle">3</div>
-                                <span>Orta</span>
+                            <label class="option-label">
+                                <input type="radio" name="staff" value="3">
+                                <span class="option-text">Orta</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="process" value="4">
-                                <div class="rating-circle">4</div>
-                                <span>İyi</span>
+                            <label class="option-label">
+                                <input type="radio" name="staff" value="4">
+                                <span class="option-text">İyi</span>
                             </label>
-                            <label class="rating-option">
-                                <input type="radio" name="process" value="5">
-                                <div class="rating-circle">5</div>
-                                <span>Çok İyi</span>
+                            <label class="option-label">
+                                <input type="radio" name="staff" value="5">
+                                <span class="option-text">Mükemmel</span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="survey-question">
-                        <h3>4. Kliniğimizi başkalarına tavsiye eder misiniz?</h3>
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" name="recommend" value="yes" required>
-                                Evet, kesinlikle
+                        <h4>4. Kliniğimizin temizliği ve hijyen standartları nasıldı?</h4>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="cleanliness" value="1" required>
+                                <span class="option-text">Çok Kötü</span>
                             </label>
-                            <label class="radio-option">
-                                <input type="radio" name="recommend" value="maybe">
-                                Belki
+                            <label class="option-label">
+                                <input type="radio" name="cleanliness" value="2">
+                                <span class="option-text">Kötü</span>
                             </label>
-                            <label class="radio-option">
-                                <input type="radio" name="recommend" value="no">
-                                Hayır
+                            <label class="option-label">
+                                <input type="radio" name="cleanliness" value="3">
+                                <span class="option-text">Orta</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="cleanliness" value="4">
+                                <span class="option-text">İyi</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="cleanliness" value="5">
+                                <span class="option-text">Mükemmel</span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="comments">Ek görüş ve önerileriniz:</label>
-                        <textarea id="comments" class="form-control" rows="4"></textarea>
+                        <label for="suggestions">Geliştirmemizi istediğiniz noktalar (İsteğe bağlı)</label>
+                        <textarea id="suggestions" rows="4"></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Anketi Gönder</button>
@@ -1561,186 +1383,249 @@
         </div>
     </section>
 
-    <!-- Google Yorumlar Bölümü -->
-    <section class="section" id="google-yorumlar">
-        <div class="container">
-            <div class="section-title">
-                <h2>Google Yorumları</h2>
-                <p>Müşterilerimizin deneyimlerini okuyun ve kendi yorumunuzu paylaşın</p>
-            </div>
-            
-            <div class="google-reviews">
-                <div class="review-form">
-                    <h3>Deneyiminizi Paylaşın</h3>
-                    <p>Kliniğimizdeki deneyiminizi Google'da paylaşarak başkalarının da doğru karar vermesine yardımcı olun.</p>
-                    
-                    <form id="reviewForm">
-                        <div class="form-group">
-                            <label>Değerlendirme</label>
-                            <div class="stars">
-                                <span class="star" data-value="1">★</span>
-                                <span class="star" data-value="2">★</span>
-                                <span class="star" data-value="3">★</span>
-                                <span class="star" data-value="4">★</span>
-                                <span class="star" data-value="5">★</span>
-                            </div>
-                            <input type="hidden" id="rating" name="rating" value="0">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="review-title">Başlık</label>
-                            <input type="text" id="review-title" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="review-content">Yorumunuz</label>
-                            <textarea id="review-content" class="form-control" rows="4" required></textarea>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="review-name">Adınız *</label>
-                                <input type="text" id="review-name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="review-email">E-posta (isteğe bağlı)</label>
-                                <input type="email" id="review-email" class="form-control">
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Yorumu Gönder</button>
-                    </form>
-                </div>
-                
-                <div class="review-list">
-                    <h3>Müşteri Yorumları</h3>
-                    
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="review-meta">
-                                <h4>Ahmet Yılmaz</h4>
-                                <div class="review-date">15 Haziran 2023</div>
-                            </div>
-                        </div>
-                        <div class="review-stars">
-                            ★★★★★
-                        </div>
-                        <h4>Mükemmel Hizmet!</h4>
-                        <p>Kedim Pamuk'un tedavisi için kliniğe başvurduk. Veteriner hekimlerin ilgisi ve bilgisi gerçekten takdire şayan. Tüm ekibe teşekkür ederim.</p>
-                    </div>
-                    
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="review-meta">
-                                <h4>Zeynep Kaya</h4>
-                                <div class="review-date">10 Mayıs 2023</div>
-                            </div>
-                        </div>
-                        <div class="review-stars">
-                            ★★★★☆
-                        </div>
-                        <h4>Profesyonel Yaklaşım</h4>
-                        <p>Köpeğim Karabaş'ın aşıları ve genel muayenesi için geldik. İşlemler hızlı ve profesyonelce yapıldı. Sadece bekleme süresi biraz uzundu.</p>
-                    </div>
-                    
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="review-meta">
-                                <h4>Mehmet Demir</h4>
-                                <div class="review-date">3 Nisan 2023</div>
-                            </div>
-                        </div>
-                        <div class="review-stars">
-                            ★★★★★
-                        </div>
-                        <h4>Canlı Destek Çok Yardımcı Oldu</h4>
-                        <p>Kuşum Maviş'in davranışlarındaki değişiklik nedeniyle endişelenmiştim. Canlı destek hattından hemen yardım aldım ve sorunumu çözdüler. Çok teşekkürler!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success Stories Section -->
-    <section class="section stories-section" id="basari-hikayeleri">
+    <!-- Başarı Hikayeleri -->
+    <section class="success-stories-section" id="basari-hikayeleri">
         <div class="container">
             <div class="section-title">
                 <h2>Başarı Hikayeleri</h2>
-                <p>Evcil dostlarımızın iyileşme yolculukları ve mutlu sonları</p>
+                <p>Evcil dostlarımızın sağlığına kavuşma öyküleri</p>
             </div>
             
             <div class="stories-grid">
-                <!-- Story 1 -->
                 <div class="story-card">
                     <div class="story-img">
-                        <img src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Karabaş'ın Başarı Hikayesi">
+                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Başarı Hikayesi">
                     </div>
                     <div class="story-content">
-                        <span class="story-tag">Ortopedik Cerrahi</span>
-                        <h3>Karabaş'ın Yürüme Sevinci</h3>
-                        <div class="story-pet">
-                            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Karabaş">
-                            <div>
-                                <h4>Karabaş</h4>
-                                <span>Golden Retriever, 3 Yaşında</span>
+                        <h3>Karabaş'ın Kurtuluş Öyküsü</h3>
+                        <div class="pet-info">
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Karabaş">
+                            <span>Karabaş, 5 yaşında Golden Retriever</span>
+                        </div>
+                        <p>Karabaş, yutmuş olduğu yabancı cisim nedeniyle acil olarak kliniğimize getirildi. Endoskopik müdahale ile cisim başarıyla çıkarıldı ve Karabaş ertesi gün sağlığına kavuştu.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-img">
+                        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Başarı Hikayesi">
+                    </div>
+                    <div class="story-content">
+                        <h3>Pamuk'un Mucizevi İyileşmesi</h3>
+                        <div class="pet-info">
+                            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1143&q=80" alt="Pamuk">
+                            <span>Pamuk, 3 yaşında Ankara Kedisi</span>
+                        </div>
+                        <p>Pamuk, ağır bir trafik kazası geçirmişti. Çoklu kırıklar ve iç kanama teşhisi konuldu. Yoğun cerrahi müdahale ve 1 aylık fizik tedavi sonrası tamamen iyileşti.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-img">
+                        <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1168&q=80" alt="Başarı Hikayesi">
+                    </div>
+                    <div class="story-content">
+                        <h3>Maviş'in Diyabetle Mücadelesi</h3>
+                        <div class="pet-info">
+                            <img src="https://images.unsplash.com/photo-1555169062-013468b47731?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Maviş">
+                            <span>Maviş, 8 yaşında Maviş Muhabbet Kuşu</span>
+                        </div>
+                        <p>Maviş'e diyabet teşhisi konulduğunda durumu kritikti. Özel beslenme programı ve düzenli insülin tedavisi ile Maviş artık sağlıklı bir şekilde yaşamına devam ediyor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Şikayet & Öneri -->
+    <section class="feedback-section" id="sikayet-oneri">
+        <div class="container">
+            <div class="section-title">
+                <h2>Şikayet & Öneri</h2>
+                <p>Görüşleriniz bizim için değerli</p>
+            </div>
+            
+            <div class="feedback-container">
+                <div class="feedback-tabs">
+                    <div class="feedback-tab active" data-tab="complaint">Şikayet</div>
+                    <div class="feedback-tab" data-tab="suggestion">Öneri</div>
+                    <div class="feedback-tab" data-tab="compliment">Takdir</div>
+                </div>
+                
+                <div class="feedback-content active" id="complaint-content">
+                    <form class="feedback-form">
+                        <div class="form-group">
+                            <label for="complaint-type">Şikayet Türü</label>
+                            <select id="complaint-type" required>
+                                <option value="">Seçiniz</option>
+                                <option value="service">Hizmet Kalitesi</option>
+                                <option value="staff">Personel Davranışı</option>
+                                <option value="hygiene">Hijyen Koşulları</option>
+                                <option value="pricing">Fiyatlandırma</option>
+                                <option value="other">Diğer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="complaint-name">Adınız Soyadınız</label>
+                                <input type="text" id="complaint-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="complaint-phone">Telefon Numaranız</label>
+                                <input type="tel" id="complaint-phone" required>
                             </div>
                         </div>
-                        <p>Karabaş trafik kazası sonucu arka bacaklarını kullanamıyordu. Uzman ekibimiz tarafından yapılan başarılı ortopedik ameliyat ve fizik tedavi sonrası Karabaş yeniden yürümeye başladı.</p>
-                        <div class="story-quote">
-                            <i class="fas fa-quote-left"></i> Karabaş'ın yeniden koştuğunu görmek hayatımın en mutlu anlarından biriydi. Tüm ekibe minnettarız. - Ahmet Bey
+                        
+                        <div class="form-group">
+                            <label for="complaint-date">Şikayet Tarihi (Varsa)</label>
+                            <input type="date" id="complaint-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="complaint-details">Şikayet Detayları</label>
+                            <textarea id="complaint-details" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="complaint-solution">Çözüm Öneriniz (İsteğe bağlı)</label>
+                            <textarea id="complaint-solution" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Şikayeti Gönder</button>
+                    </form>
+                </div>
+                
+                <div class="feedback-content" id="suggestion-content">
+                    <form class="feedback-form">
+                        <div class="form-group">
+                            <label for="suggestion-type">Öneri Kategorisi</label>
+                            <select id="suggestion-type" required>
+                                <option value="">Seçiniz</option>
+                                <option value="service">Hizmet İyileştirme</option>
+                                <option value="facility">Tesis Geliştirme</option>
+                                <option value="process">Süreç İyileştirme</option>
+                                <option value="technology">Teknoloji Önerisi</option>
+                                <option value="other">Diğer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="suggestion-name">Adınız Soyadınız</label>
+                                <input type="text" id="suggestion-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="suggestion-email">E-posta Adresiniz</label>
+                                <input type="email" id="suggestion-email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="suggestion-details">Öneri Detayları</label>
+                            <textarea id="suggestion-details" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="suggestion-benefits">Beklenen Faydalar (İsteğe bağlı)</label>
+                            <textarea id="suggestion-benefits" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Öneriyi Gönder</button>
+                    </form>
+                </div>
+                
+                <div class="feedback-content" id="compliment-content">
+                    <form class="feedback-form">
+                        <div class="form-group">
+                            <label for="compliment-type">Takdir Türü</label>
+                            <select id="compliment-type" required>
+                                <option value="">Seçiniz</option>
+                                <option value="doctor">Veteriner Hekim</option>
+                                <option value="nurse">Veteriner Teknisyen</option>
+                                <option value="staff">Diğer Personel</option>
+                                <option value="service">Genel Hizmet</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="compliment-name">Adınız Soyadınız</label>
+                                <input type="text" id="compliment-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="compliment-person">Takdir Ettiğiniz Kişi (Varsa)</label>
+                                <input type="text" id="compliment-person">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="compliment-date">Takdir Tarihi (Varsa)</label>
+                            <input type="date" id="compliment-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="compliment-details">Takdir Sebebi</label>
+                            <textarea id="compliment-details" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Takdiri Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="musteri-memnuniyeti">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hasta Memnuniyeti</h2>
+                <p>Evcil dost sahiplerinin deneyimleri</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Köpeğimizin ameliyatı için Elçi Veteriner Kliniği'ni tercih ettik. Hem doktorların uzmanlığı hem de personelin ilgisi gerçekten takdire şayandı. Köpeğimiz çok hızlı iyileşti."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Müşteri Görüşü">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ayşe Kaya</h4>
+                            <span>Kedi Sahibi</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Story 2 -->
-                <div class="story-card">
-                    <div class="story-img">
-                        <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Pamuk'un Başarı Hikayesi">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Kedimizin diş problemi vardı, birçok klinik çözüm bulamadı. Elçi Veteriner'de Dr. Zeynep Hanım sayesinde kedimiz sağlığına kavuştu. Herkese tavsiye ediyorum."</p>
                     </div>
-                    <div class="story-content">
-                        <span class="story-tag">Onkolojik Tedavi</span>
-                        <h3>Pamuk'un Kanseri Yenme Mücadelesi</h3>
-                        <div class="story-pet">
-                            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Pamuk">
-                            <div>
-                                <h4>Pamuk</h4>
-                                <span>British Shorthair, 7 Yaşında</span>
-                            </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Müşteri Görüşü">
                         </div>
-                        <p>Pamuk'a lenfoma teşhisi konulduğunda umutlarımız tükenmişti. Ancak kliniğimizde uygulanan kemoterapi ve destek tedavileri sayesinde Pamuk tamamen iyileşti ve sağlığına kavuştu.</p>
-                        <div class="story-quote">
-                            <i class="fas fa-quote-left"></i> Veteriner hekimlerin özverisi ve tedavi sürecindeki ilgisi Pamuk'un hayatını kurtardı. - Zeynep Hanım
+                        <div class="author-info">
+                            <h4>Mehmet Yılmaz</h4>
+                            <span>Köpek Sahibi</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Story 3 -->
-                <div class="story-card">
-                    <div class="story-img">
-                        <img src="https://images.unsplash.com/photo-1553284965-e2815db2e5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Maviş'in Başarı Hikayesi">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Gece yarısı kedim acil müdahale gerektiriyordu. 7/24 hizmet veren Elçi Veteriner bize hemen yardımcı oldu. Profesyonel yaklaşımları için çok teşekkür ederiz."</p>
                     </div>
-                    <div class="story-content">
-                        <span class="story-tag">Göz Cerrahisi</span>
-                        <h3>Maviş'in Görme Mücadelesi</h3>
-                        <div class="story-pet">
-                            <img src="https://images.unsplash.com/photo-1555169062-013468b47731?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Maviş">
-                            <div>
-                                <h4>Maviş</h4>
-                                <span>Sultan Papağanı, 5 Yaşında</span>
-                            </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Müşteri Görüşü">
                         </div>
-                        <p>Maviş'in gözlerinde oluşan katarakt nedeniyle görme yetisini neredeyse kaybetmişti. Uzman ekibimiz tarafından gerçekleştirilen başarılı göz ameliyatı sonrası Maviş yeniden görmeye başladı.</p>
-                        <div class="story-quote">
-                            <i class="fas fa-quote-left"></i> Maviş'in ameliyat sonrası etrafı yeniden görmeye başlaması muhteşem bir andı. - Can Bey
+                        <div class="author-info">
+                            <h4>Zeynep Demir</h4>
+                            <span>Kuş Sahibi</span>
                         </div>
                     </div>
                 </div>
@@ -1748,58 +1633,48 @@
         </div>
     </section>
 
-    <!-- Feedback Section -->
-    <section class="section feedback-section" id="sikayet-oneri">
+    <!-- FAQ Section -->
+    <section class="faq-section" id="sss">
         <div class="container">
             <div class="section-title">
-                <h2>Şikayet & Öneri</h2>
-                <p>Görüşleriniz bizim için çok değerli</p>
+                <h2>Sık Sorulan Sorular</h2>
+                <p>Hasta ilişkileri hakkında merak ettikleriniz</p>
             </div>
             
-            <div class="feedback-container">
-                <div class="feedback-form">
-                    <form id="feedbackForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="feedback-name">Adınız Soyadınız *</label>
-                                <input type="text" id="feedback-name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="feedback-contact">İletişim Bilgileriniz (Telefon/E-posta) *</label>
-                                <input type="text" id="feedback-contact" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Şikayet/Öneri Türü *</label>
-                            <div class="radio-group">
-                                <label class="radio-option">
-                                    <input type="radio" name="feedback-type" value="complaint" required>
-                                    Şikayet
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="feedback-type" value="suggestion">
-                                    Öneri
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="feedback-type" value="compliment">
-                                    Teşekkür
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="feedback-subject">Konu *</label>
-                            <input type="text" id="feedback-subject" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="feedback-message">Mesajınız *</label>
-                            <textarea id="feedback-message" class="form-control" rows="6" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Gönder</button>
-                    </form>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Randevu nasıl alabilirim?</div>
+                    <div class="faq-answer">
+                        <p>Randevu almak için bu sayfadaki online randevu formunu doldurabilir, telefonla (0332 322 32 20) arayabilir veya kliniğimize gelerek randevu oluşturabilirsiniz.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Acil durumlarda ne yapmalıyım?</div>
+                    <div class="faq-answer">
+                        <p>Kliniğimiz 7/24 acil hizmet vermektedir. Acil durumlarda 0332 322 32 20 numaralı telefondan bizi arayabilirsiniz. Veteriner hekimlerimiz size en kısa sürede dönüş yapacaktır.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Ödeme seçenekleri nelerdir?</div>
+                    <div class="faq-answer">
+                        <p>Nakit, kredi kartı (taksitli/taksitsiz) ve banka havalesi ile ödeme yapabilirsiniz. Ayrıca belirli hizmetler için sağlık sigortası kullanabilirsiniz.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Hasta takip sistemi nedir?</div>
+                    <div class="faq-answer">
+                        <p>Hasta takip sistemimiz ile evcil dostunuzun tüm sağlık bilgilerine online olarak ulaşabilir, aşı takvimlerini takip edebilir ve randevularınızı yönetebilirsiniz. Sisteme giriş için kliniğimizden kullanıcı adı ve şifre almanız gerekmektedir.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Şikayet ve önerilerimi nasıl iletebilirim?</div>
+                    <div class="faq-answer">
+                        <p>Şikayet ve önerilerinizi info@elciveteriner.com adresine e-posta göndererek, telefonla (0332 322 32 20) arayarak veya kliniğimizdeki hasta ilişkileri masasına başvurarak iletebilirsiniz.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1825,15 +1700,18 @@
                     <li><a href="hakkimizda.html">Hakkımızda</a></li>
                     <li><a href="hizmetlerimiz.html">Hizmetlerimiz</a></li>
                     <li><a href="blog.html">Blog</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="hasta-iliskileri.html">Hasta İlişkileri</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Hasta İlişkileri</h3>
+                <h3>Konya Veteriner Hizmetlerimiz</h3>
                 <ul class="footer-links">
-                    <li><a href="#online-randevu">Online Randevu</a></li>
-                    <li><a href="#memnuniyet-anketi">Memnuniyet Anketi</a></li>
-                    <li><a href="#google-yorumlar">Google Yorumları</a></li>
-                    <li><a href="#sikayet-oneri">Şikayet & Öneri</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya Acil Veteriner</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Cerrahi Operasyonlar</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Ağız ve Diş Sağlığı</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da İç Hastalıkları</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Fizik Tedavi</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1841,7 +1719,7 @@
                 <ul class="footer-contact">
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
-                        <a href="https://www.google.com/maps?q=Havzan+Mahallesi,+Yeni+Meram+Caddesi+No:17/1,+Meram/Konya" target="_blank">Havzan Mahallesi, Yeni Meram Caddesi No:17/1, Meram/Konya</a>
+                        <a href="https://www.google.com/maps?q=Havzan+Mahallesi,+Yeni+Meram+Caddesi+No:17/1,+Meram/Konya" target="_blank">Havzan Mah. Yeni Meram Cad. 17/1 Meram/Konya</a>
                     </li>
                     <li>
                         <i class="fas fa-phone-alt"></i>
@@ -1865,60 +1743,6 @@
         </div>
     </footer>
 
-    <!-- Acil Arama Butonu -->
-    <div class="emergency-call" id="emergencyCall">
-        <i class="fas fa-phone-alt"></i>
-    </div>
-
-    <!-- Canlı Sohbet Butonu -->
-    <div class="chat-bubble" id="chatBubble">
-        <i class="fas fa-comment-dots"></i>
-    </div>
-
-    <!-- Canlı Sohbet Penceresi -->
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            <h3><i class="fas fa-comments"></i> Elçi Veteriner Canlı Destek</h3>
-            <button class="close-chat" id="closeChatBtn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
-                <div class="message-content">
-                    Merhaba! Ben Elçi Veteriner Kliniği'nin yapay zeka asistanıyım. 🐾<br><br>
-                    Evcil dostunuzla ilgili sorularınızı bana sorabilirsiniz. Acil durumlarda sizi doğrudan veteriner hekimlerimize bağlayabilirim.
-                </div>
-                <div class="message-time">Şimdi</div>
-            </div>
-            
-            <div class="message bot">
-                <div class="message-content">
-                    Size nasıl yardımcı olabilirim? Aşağıdaki konularda destek verebilirim:<br>
-                    - Randevu alma<br>
-                    - Acil durumlar<br>
-                    - Hizmetlerimiz hakkında bilgi<br>
-                    - Fiyatlandırma<br>
-                    - Hayvan sağlığı tavsiyeleri
-                </div>
-                <div class="message-time">Şimdi</div>
-            </div>
-        </div>
-        
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Mesajınızı yazın...">
-            <button class="send-button" id="sendMessageBtn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1937,232 +1761,120 @@
                     e.preventDefault();
                     const dropdown = this.parentElement;
                     dropdown.classList.toggle('active');
-                    
-                    // Diğer dropdown'ları kapat
-                    document.querySelectorAll('.dropdown').forEach(otherDropdown => {
-                        if (otherDropdown !== dropdown) {
-                            otherDropdown.classList.remove('active');
-                        }
-                    });
                 }
             });
         });
         
-        // Sayfa içi linkler için smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Mobilde menüyü kapat
-                    if (window.innerWidth <= 992) {
-                        mainMenu.classList.remove('show');
-                    }
-                }
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
             });
         });
         
-        // Emergency Call Button
-        const emergencyCall = document.getElementById('emergencyCall');
+        // Appointment Form Submission
+        const appointmentForm = document.getElementById('appointmentForm');
         
-        emergencyCall.addEventListener('click', () => {
-            window.location.href = 'tel:03323223220';
-        });
-        
-        // Back to Top Button
-        const backToTopBtn = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
+        appointmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const petType = document.getElementById('petType').value;
+            const petName = document.getElementById('petName').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            if (!name || !phone || !email || !petType || !petName || !service || !date || !time) {
+                alert('Lütfen tüm gerekli alanları doldurun.');
+                return;
             }
+            
+            // Form submission simulation
+            alert('Randevunuz başarıyla oluşturuldu! En kısa sürede sizinle iletişime geçeceğiz.');
+            appointmentForm.reset();
         });
         
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // Set minimum date for appointment to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
         
-        // Canlı Sohbet Kontrolleri
-        const chatBubble = document.getElementById('chatBubble');
-        const closeChatBtn = document.getElementById('closeChatBtn');
-        const chatWindow = document.getElementById('chatWindow');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
         
-        // Sohbet baloncuğuna tıklama
-        chatBubble.addEventListener('click', () => {
-            chatWindow.classList.add('active');
-        });
-        
-        // Sohbeti kapatma
-        closeChatBtn.addEventListener('click', () => {
-            chatWindow.classList.remove('active');
-        });
-        
-        // Mesaj gönderme
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                // Kullanıcı mesajını ekle
-                addMessage(message, 'user');
-                chatInput.value = '';
-                
-                // Yapay zeka yanıtı için 1 saniye bekle
-                setTimeout(() => {
-                    // Basit bir yapay zeka yanıtı
-                    let response = '';
-                    
-                    if (message.toLowerCase().includes('acil') || 
-                        message.toLowerCase().includes('yaralan') || 
-                        message.toLowerCase().includes('zehirlen') || 
-                        message.toLowerCase().includes('kaza')) {
-                        response = `Acil durum tespit ettim! Sizi hemen veteriner hekimlerimize bağlıyorum. <br><br>
-                        <a href="tel:05532621670" style="display:inline-block; background:var(--emergency-red); color:white; padding:10px 20px; border-radius:30px; margin-top:10px; font-weight:bold;">
-                            <i class="fas fa-phone-alt"></i> 0553 262 16 70'ı Arayın
-                        </a>`;
-                    } else if (message.toLowerCase().includes('randevu') || 
-                               message.toLowerCase().includes('muayene') || 
-                               message.toLowerCase().includes('görüşme')) {
-                        response = `Randevu oluşturmak için sizi yönlendiriyorum: <br><br>
-                        <a href="tel:03323223220" style="display:inline-block; background:var(--secondary-color); color:white; padding:10px 20px; border-radius:30px; margin-top:10px;">
-                            <i class="fas fa-phone-alt"></i> 0332 322 32 20'ı Arayın
-                        </a>`;
-                    } else if (message.toLowerCase().includes('teşekkür') || 
-                              message.toLowerCase().includes('sağol')) {
-                        response = `Rica ederim! 🐶 Evcil dostunuzla ilgili başka bir sorunuz varsa lütfen sormaktan çekinmeyin.`;
-                    } else if (message.toLowerCase().includes('fiyat') || 
-                              message.toLowerCase().includes('ücret')) {
-                        response = `Hizmetlerimizin fiyatları uygulanacak tedaviye göre değişmektedir. Size net bir fiyat verebilmemiz için lütfen kliniğimizi arayın veya ziyaret edin.`;
-                    } else if (message.toLowerCase().includes('açık') || 
-                              message.toLowerCase().includes('saat')) {
-                        response = `Kliniğimizin çalışma saatleri:<br>
-                        - Pazartesi-Cumartesi: 08:00-19:00<br>
-                        - Pazar: Acil hizmet (sadece acil durumlar)`;
-                    } else {
-                        response = `Sorunuz için teşekkür ederim! Veteriner hekimlerimiz en kısa sürede size dönüş yapacaktır. Acil bir durum varsa lütfen belirtin, sizi hemen bağlayabilirim. <br><br>
-                        Ayrıca bizi doğrudan arayabilirsiniz: <a href="tel:05532621670">0553 262 16 70</a>`;
-                    }
-                    
-                    addMessage(response, 'bot');
-                }, 1000);
-            }
-        }
-        
-        // Mesaj ekleme fonksiyonu
-        function addMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', sender);
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.classList.add('message-content');
-            contentDiv.innerHTML = text;
-            
-            const timeDiv = document.createElement('div');
-            timeDiv.classList.add('message-time');
-            
-            const now = new Date();
-            const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            timeDiv.textContent = timeString;
-            
-            messageDiv.appendChild(contentDiv);
-            messageDiv.appendChild(timeDiv);
-            chatMessages.appendChild(messageDiv);
-            
-            // Otomatik olarak en son mesaja kaydır
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        // Mesaj gönderme butonu
-        sendMessageBtn.addEventListener('click', sendMessage);
-        
-        // Enter tuşu ile mesaj gönderme
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-        
-        // Yıldız değerlendirme sistemi
-        const stars = document.querySelectorAll('.star');
-        const ratingInput = document.getElementById('rating');
-        
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                const value = parseInt(this.getAttribute('data-value'));
-                ratingInput.value = value;
-                
-                // Tüm yıldızları sıfırla
-                stars.forEach(s => s.classList.remove('selected'));
-                
-                // Seçilen yıldıza kadar olanları işaretle
-                for (let i = 0; i < value; i++) {
-                    stars[i].classList.add('selected');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
                 }
             });
-            
-            star.addEventListener('mouseover', function() {
-                const value = parseInt(this.getAttribute('data-value'));
+        }, observerOptions);
+        
+        // Observe elements with animations
+        document.querySelectorAll('.section-title h2, .page-header h1, .animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Feedback tabs
+        const feedbackTabs = document.querySelectorAll('.feedback-tab');
+        const feedbackContents = document.querySelectorAll('.feedback-content');
+        
+        feedbackTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                feedbackTabs.forEach(t => t.classList.remove('active'));
+                feedbackContents.forEach(c => c.classList.remove('active'));
                 
-                // Tüm yıldızları sıfırla
-                stars.forEach(s => s.classList.remove('hovered'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
                 
-                // Üzerine gelinen yıldıza kadar olanları işaretle
-                for (let i = 0; i < value; i++) {
-                    stars[i].classList.add('hovered');
-                }
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.add('active');
             });
-            
-            star.addEventListener('mouseout', function() {
-                // Hover efektini kaldır
-                stars.forEach(s => s.classList.remove('hovered'));
-                
-                // Seçili değerleri geri yükle
-                const selectedValue = parseInt(ratingInput.value);
-                for (let i = 0; i < selectedValue; i++) {
-                    stars[i].classList.add('selected');
-                }
-            });
         });
         
-        // Form submission handlers
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+        // Survey form submission
+        const satisfactionSurvey = document.getElementById('satisfactionSurvey');
+        
+        satisfactionSurvey.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Randevu talebiniz başarıyla alındı. En kısa sürede sizinle iletişime geçilecektir.');
-            this.reset();
+            alert('Anketiniz için teşekkür ederiz! Geri bildiriminiz hizmet kalitemizi artırmamıza yardımcı olacaktır.');
+            satisfactionSurvey.reset();
         });
         
-        document.getElementById('satisfactionForm').addEventListener('submit', function(e) {
+        // Feedback form submissions
+        const complaintForm = document.querySelector('#complaint-content form');
+        const suggestionForm = document.querySelector('#suggestion-content form');
+        const complimentForm = document.querySelector('#compliment-content form');
+        
+        complaintForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Anketiniz başarıyla gönderildi. Geri bildiriminiz için teşekkür ederiz!');
-            this.reset();
+            alert('Şikayetiniz başarıyla gönderildi. En kısa sürede size dönüş yapacağız.');
+            complaintForm.reset();
         });
         
-        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        suggestionForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapılacaktır.');
-            this.reset();
+            alert('Öneriniz için teşekkür ederiz! Değerlendirip size geri dönüş yapacağız.');
+            suggestionForm.reset();
         });
         
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        complimentForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Yorumunuz için teşekkür ederiz! Google yorumlarımıza eklenmiştir.');
-            this.reset();
-            
-            // Yıldızları sıfırla
-            stars.forEach(star => star.classList.remove('selected'));
-            ratingInput.value = '0';
+            alert('Takdiriniz için çok teşekkür ederiz! Ekibimizle paylaşacağız.');
+            complimentForm.reset();
         });
     </script>
 </body>
