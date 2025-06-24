@@ -1,0 +1,15 @@
+name: SSS Auto-Update
+on:
+  push:
+    paths: ['sss.html']
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install beautifulsoup4
+      - run: python html_json.py
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sss-json
+          path: sss.json
