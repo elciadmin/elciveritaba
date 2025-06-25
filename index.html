@@ -765,119 +765,7 @@
             color: var(--gray);
         }
         
-        /* Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 350px;
-            max-height: 500px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-widget.active {
-            display: flex;
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .chat-header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .chat-header h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-        
-        .close-chat {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 20px;
-            cursor: pointer;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-            max-height: 300px;
-        }
-        
-        .message {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .message-content {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 18px;
-            position: relative;
-        }
-        
-        .received {
-            align-self: flex-start;
-            background-color: #e5e5ea;
-            color: #000;
-        }
-        
-        .sent {
-            align-self: flex-end;
-            background-color: var(--secondary-color);
-            color: var(--white);
-        }
-        
-        .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-        }
-        
-        #chatInput {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 50px;
-            margin-right: 10px;
-        }
-        
-        .send-btn {
-            background-color: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .send-btn:hover {
-            background-color: #0e9bb8;
-        }
-        
-        /* Acil Arama Butonu */
+        /* Emergency Call Button */
         .emergency-call {
             position: fixed;
             bottom: 110px;
@@ -903,29 +791,27 @@
             transform: scale(1.1);
         }
         
-        /* Chat Toggle Button */
-        .chat-toggle {
+        /* Sohbet Balonu Stili */
+        .chat-bubble {
             position: fixed;
             bottom: 180px;
             right: 30px;
-            background-color: var(--secondary-color);
-            color: white;
             width: 60px;
             height: 60px;
+            background: linear-gradient(135deg, #6a0ea1, #10b3d1);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            z-index: 999;
+            box-shadow: 0 5px 15px rgba(106, 14, 161, 0.4);
             cursor: pointer;
-            transition: all 0.3s ease;
+            z-index: 999;
             animation: pulse-chat 2s infinite;
         }
         
-        .chat-toggle:hover {
-            background-color: #0e9bb8;
+        .chat-bubble:hover {
             transform: scale(1.1);
         }
         
@@ -939,6 +825,12 @@
             0% { box-shadow: 0 0 0 0 rgba(16, 179, 209, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(16, 179, 209, 0); }
             100% { box-shadow: 0 0 0 0 rgba(16, 179, 209, 0); }
+        }
+        
+        /* Botpress Chat Widget Pozisyon Ayarları */
+        .bp-widget-side {
+            bottom: 110px !important;
+            right: 30px !important;
         }
         
         /* Call Modal */
@@ -1005,32 +897,6 @@
         .close-call {
             background-color: #f1f1f1;
             border: 1px solid #ddd;
-        }
-        
-        /* Chat AI Improvements */
-        .ai-response {
-            font-style: italic;
-            color: #666;
-        }
-        
-        .transfer-chat {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .transfer-chat:hover {
-            background-color: #5a0c8b;
         }
         
         /* Appointment Modal */
@@ -1324,12 +1190,6 @@
                 gap: 0;
             }
             
-            .chat-widget {
-                width: 90%;
-                right: 5%;
-                bottom: 80px;
-            }
-            
             .emergency-call {
                 bottom: 100px;
                 right: 20px;
@@ -1338,12 +1198,17 @@
                 font-size: 20px;
             }
             
-            .chat-toggle {
+            .chat-bubble {
                 bottom: 160px;
                 right: 20px;
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
+            }
+            
+            .bp-widget-side {
+                bottom: 100px !important;
+                right: 20px !important;
             }
             
             .modal-content, .mail-modal-content, .call-modal-content {
@@ -1815,32 +1680,8 @@
         <i class="fas fa-phone-alt"></i>
     </div>
 
-    <!-- Chat Widget -->
-    <div class="chat-widget" id="chatWidget">
-        <div class="chat-header">
-            <h3>Konya Veteriner Canlı Destek</h3>
-            <button class="close-chat" id="closeChat">&times;</button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message">
-                <div class="message-content received">
-                    <div class="ai-response">Merhaba! Konya Elçi Veteriner Kliniği'ne hoş geldiniz. Size nasıl yardımcı olabilirim?</div>
-                    <button class="transfer-chat" id="transferWhatsApp">
-                        <i class="fab fa-whatsapp"></i> Canlı Destek İçin WhatsApp
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Mesajınızı yazın...">
-            <button class="send-btn" id="sendMessage">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Chat Toggle Button -->
-    <div class="chat-toggle" id="chatToggle">
+    <!-- Chat Bubble Button -->
+    <div class="chat-bubble" id="chatBubble">
         <i class="fas fa-comment-dots"></i>
     </div>
 
@@ -1927,6 +1768,9 @@
     <!-- Elfsight Google Reviews Script -->
     <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
     
+    <!-- Botpress Web Chat Integration -->
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1955,16 +1799,9 @@
         // Mail Modal
         const mailModal = document.getElementById('mailModal');
         const openMailModal = document.getElementById('openMailModal');
-        const openMailModalFooter = document.getElementById('openMailModalFooter');
         const closeMail = document.getElementById('closeMail');
         
         openMailModal.addEventListener('click', (e) => {
-            e.preventDefault();
-            mailModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        openMailModalFooter.addEventListener('click', (e) => {
             e.preventDefault();
             mailModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
@@ -2064,156 +1901,34 @@
             document.body.style.overflow = 'auto';
         });
         
-        // Chat Widget
-        const chatWidget = document.getElementById('chatWidget');
-        const chatToggle = document.getElementById('chatToggle');
-        const closeChat = document.getElementById('closeChat');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendMessageBtn = document.getElementById('sendMessage');
-        const transferWhatsApp = document.getElementById('transferWhatsApp');
-        
-        chatToggle.addEventListener('click', () => {
-            chatWidget.classList.toggle('active');
+        // Botpress Web Chat Initialization
+        window.botpressWebChat.init({
+            botId: "your-bot-id", // BOTPRESS DASHBOARD'DAN ALINACAK
+            hostUrl: "https://cdn.botpress.cloud/webchat/v1",
+            messagingUrl: "https://messaging.botpress.cloud",
+            clientId: "your-client-id", // BOTPRESS DASHBOARD'DAN ALINACAK
+            lazySocket: true,
+            themeName: "prism",
+            botName: "Elçi Veteriner Asistanı",
+            avatarUrl: "https://www.elciveteriner.com.tr/images/logo.jpg",
+            stylesheet: "https://www.elciveteriner.com.tr/css/botpress-custom.css",
+            showConversationsButton: false,
+            enableTranscriptDownload: true,
+            closeOnEscape: true,
+            showPoweredBy: false,
+            disableAnimations: false,
+            hideWidget: true,
+            enablePersistHistory: true,
+            composerPlaceholder: "Mesajınızı yazın...",
+            containerWidth: "350px",
+            layoutWidth: "350px",
+            showCloseButton: true
         });
-        
-        closeChat.addEventListener('click', () => {
-            chatWidget.classList.remove('active');
-        });
-        
-        // Transfer to WhatsApp
-        transferWhatsApp.addEventListener('click', () => {
-            window.open('https://wa.me/905532621670', '_blank');
-        });
-        
-        // Bilgi veritabanı
-        const knowledgeBase = {
-            "adres": "Klinik adresimiz: Havzan Mah. Yeni Meram Cad. 17/1 Meram/Konya",
-            "telefon": "Telefon numaramız: 0332 322 32 20",
-            "acil": "Acil durumlarda 7/24 hizmet veriyoruz. Acil numaramız: 0332 322 32 20",
-            "randevu": "Randevu almak için telefon numaramızı arayabilir veya web sitemizdeki randevu formunu doldurabilirsiniz.",
-            "çalışma saatleri": "Çalışma saatlerimiz: Pazartesi-Cumartesi 08:00-19:00, Pazar günleri sadece acil hizmet veriyoruz.",
-            "hizmetler": "Başlıca hizmetlerimiz: Acil veteriner, cerrahi operasyonlar, aşı, diş tedavisi, iç hastalıkları, doğum ve jinekoloji, fizik tedavi",
-            "fiyat": "Fiyat bilgisi için lütfen kliniğimizi arayın. Hayvanınızın durumuna göre fiyat değişiklik gösterebilir.",
-            "klinik": "Klinik bilgileri için 'Hakkımızda' sayfasını ziyaret edebilirsiniz.",
-            "aşı": "Aşılar hakkında detaylı bilgi için 'Hizmetlerimiz' sayfasını ziyaret edin.",
-            "randevu al": "Online randevu almak için 'Hasta İlişkileri' bölümündeki randevu formunu kullanabilirsiniz."
-        };
-        
-        // Canlı desteğe yönlendirme fonksiyonu
-        function transferToLiveSupport() {
-            // Doğrudan WhatsApp'a yönlendirme
-            window.open('https://wa.me/905532621670', '_blank');
-            
-            // Kullanıcıya bilgi ver
-            addMessage("Canlı destek için WhatsApp'a yönlendiriliyorsunuz...", 'received');
-            
-            // 3 saniye sonra chat'i kapat
-            setTimeout(() => {
-                chatWidget.classList.remove('active');
-            }, 3000);
-        }
-        
-        // Mesaj gönderme fonksiyonu
-        function sendChatMessage() {
-            const message = chatInput.value.trim().toLowerCase();
-            if (message) {
-                // Kullanıcı mesajını ekle
-                addMessage(message, 'sent');
-                
-                // 1 saniye sonra yanıt ver
-                setTimeout(() => {
-                    // Canlı destek isteği kontrolü
-                    if (message.includes('canlı') || message.includes('temsilci') || message.includes('insan')) {
-                        transferToLiveSupport();
-                    } 
-                    // Diğer sorular için yapay zeka yanıtı
-                    else {
-                        let response = generateAIResponse(message);
-                        addMessage(response, 'received');
-                    }
-                }, 1000);
-                
-                chatInput.value = '';
-            }
-        }
-        
-        // Yapay zeka yanıtı oluşturma
-        function generateAIResponse(message) {
-            // Anahtar kelimeleri kontrol et
-            const keywordResponses = {
-                "merhaba": "Merhaba! Konya Elçi Veteriner Kliniği'ne hoş geldiniz. Size nasıl yardımcı olabilirim?",
-                "teşekkür": "Rica ederiz! Başka bir konuda yardımcı olabilir miyim?",
-                "yardım": "Size hangi konuda yardımcı olabilirim? Randevu, adres, çalışma saatleri veya hizmetlerimiz hakkında bilgi verebilirim."
-            };
-            
-            // Önce anahtar kelimeleri kontrol et
-            for (const [keyword, response] of Object.entries(keywordResponses)) {
-                if (message.includes(keyword)) {
-                    return response;
-                }
-            }
-            
-            // Sonra bilgi bankasını kontrol et
-            for (const [keyword, response] of Object.entries(knowledgeBase)) {
-                if (message.includes(keyword)) {
-                    return response;
-                }
-            }
-            
-            // Eğer anlamadıysa genel yanıt ver
-            return "Anladım. Size daha iyi yardımcı olabilmemiz için lütfen daha spesifik bir soru sorun. Canlı destek için 'canlı destek' yazabilirsiniz.";
-        }
-        
-        // Mesaj ekleme fonksiyonu
-        function addMessage(text, type) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message';
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.className = `message-content ${type}`;
-            
-            if (type === 'received') {
-                const aiDiv = document.createElement('div');
-                aiDiv.className = 'ai-response';
-                aiDiv.textContent = text;
-                contentDiv.appendChild(aiDiv);
-                
-                // Canlı destek butonu
-                if (text.includes("Canlı destek için") || text.includes("WhatsApp'a yönlendiriliyorsunuz")) {
-                    const transferBtn = document.createElement('button');
-                    transferBtn.className = 'transfer-chat';
-                    transferBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Canlı Destek İçin WhatsApp';
-                    transferBtn.onclick = transferToLiveSupport;
-                    contentDiv.appendChild(transferBtn);
-                }
-            } else {
-                contentDiv.textContent = text;
-            }
-            
-            messageDiv.appendChild(contentDiv);
-            chatMessages.appendChild(messageDiv);
-            
-            // Scroll to bottom
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        sendMessageBtn.addEventListener('click', sendChatMessage);
-        
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-        
-        window.addEventListener('click', (e) => {
-            if (e.target === appointmentModal || e.target === mailModal || e.target === videoModal || e.target === callModal) {
-                appointmentModal.style.display = 'none';
-                mailModal.style.display = 'none';
-                videoModal.style.display = 'none';
-                callModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
+
+        // Chat Bubble Button
+        document.getElementById('chatBubble').addEventListener('click', function() {
+            window.botpressWebChat.sendEvent({ type: 'show' });
+            window.botpressWebChat.sendEvent({ type: 'toggle' });
         });
         
         // Counter Animation
@@ -2251,26 +1966,90 @@
         
         observer.observe(statsSection);
         
-        // Form Submission
+        // Form Submission with Appointment Conflict Check
         const appointmentForm = document.getElementById('appointmentForm');
         
-        appointmentForm.addEventListener('submit', (e) => {
+        appointmentForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(appointmentForm);
-            const appointmentData = {};
-            formData.forEach((value, key) => {
-                appointmentData[key] = value;
+            const appointmentData = Object.fromEntries(formData.entries());
+            
+            try {
+                // Randevu çakışması kontrolü (simüle edilmiş)
+                const isAvailable = await checkAppointmentAvailability(
+                    appointmentData.date, 
+                    appointmentData.time
+                );
+                
+                if (!isAvailable) {
+                    alert('Seçtiğiniz saat doludur. Lütfen başka bir saat seçiniz.');
+                    return;
+                }
+                
+                // Randevuyu kaydet (simüle edilmiş)
+                const response = await saveAppointment(appointmentData);
+                
+                if (response.success) {
+                    // SMS gönderimini simüle et
+                    const smsMessage = `Sayın ${appointmentData.name}, ${appointmentData.petName} için ${appointmentData.date} tarihinde ${appointmentData.time} saatine Konya Elçi Veteriner Kliniği'nde randevunuz oluşturulmuştur.`;
+                    console.log(`SMS gönderildi: ${smsMessage}`);
+                    
+                    alert('Randevunuz başarıyla oluşturuldu! Size bir onay SMS\'i gönderilecektir.');
+                    appointmentModal.style.display = 'none';
+                    this.reset();
+                } else {
+                    throw new Error(response.message || 'Randevu oluşturulamadı');
+                }
+            } catch (error) {
+                console.error('Randevu hatası:', error);
+                alert('Randevu oluşturulurken bir hata oluştu: ' + error.message);
+            }
+        });
+
+        // Randevu kontrol fonksiyonu (simüle edilmiş)
+        async function checkAppointmentAvailability(date, time) {
+            // Gerçek uygulamada burada API çağrısı yapılmalı
+            // Şimdilik rastgele %20 ihtimalle dolu gösteriyoruz
+            return Math.random() > 0.2;
+        }
+
+        // Randevu kaydetme fonksiyonu (simüle edilmiş)
+        async function saveAppointment(appointmentData) {
+            // Gerçek uygulamada burada API çağrısı yapılmalı
+            return { success: true };
+        }
+
+        // Tarih değiştiğinde uygun saatleri getir
+        document.getElementById('date').addEventListener('change', function() {
+            const date = this.value;
+            const timeSelect = document.getElementById('time');
+            
+            if (!date) {
+                timeSelect.innerHTML = '<option value="">Seçiniz</option>';
+                return;
+            }
+            
+            // Sabit çalışma saatleri (08:00 - 17:00 arası saat başı)
+            const workHours = [];
+            for (let hour = 8; hour <= 17; hour++) {
+                workHours.push(`${hour}:00`);
+            }
+            
+            let options = '<option value="">Seçiniz</option>';
+            workHours.forEach(time => {
+                options += `<option value="${time}">${time}</option>`;
             });
             
-            // Simulate sending SMS
-            const smsMessage = `Sayın ${appointmentData.name}, ${appointmentData.petName} için ${appointmentData.date} tarihinde ${appointmentData.time} saatine Konya Elçi Veteriner Kliniği'nde randevunuz oluşturulmuştur. Adres: Havzan Mah. Yeni Meram Cad. No:17/1 Meram/Konya`;
-            console.log(`SMS would be sent to ${appointmentData.phone}: ${smsMessage}`);
-            
-            alert('Konya kliniğimiz için randevunuz başarıyla oluşturuldu. Size bir onay SMS\'i gönderilecektir.');
-            appointmentModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            appointmentForm.reset();
+            timeSelect.innerHTML = options;
+        });
+
+        // Dışarı tıklayarak modal kapatma
+        window.addEventListener('click', function(e) {
+            if (e.target === appointmentModal || e.target === mailModal || e.target === videoModal || e.target === callModal) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
 </body>
