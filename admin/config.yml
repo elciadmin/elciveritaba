@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: elciadmin/elciveritaba
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Yazıları"
+    folder: "_posts/blog"
+    create: true
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Tarih", name: "date", widget: "datetime" }
+      - { label: "İçerik", name: "body", widget: "markdown" }
+      - { label: "Kapak Resmi", name: "image", widget: "image" }
+
+  - name: "sayfalar"
+    label: "Sayfalar"
+    folder: "pages"
+    create: true
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "URL Yolu", name: "slug", widget: "string" }
+      - { label: "İçerik", name: "content", widget: "markdown" }
