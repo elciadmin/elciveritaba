@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: elciadmin/elciveritaba
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "sayfalar"
+    label: "Sayfalar"
+    files:
+      - label: "Anasayfa"
+        name: "index"
+        file: "index.html"
+        fields:
+          - {label: "Başlık", name: "title", widget: "string"}
+          - {label: "İçerik", name: "content", widget: "markdown"}
+
+      - label: "Hakkımızda"
+        name: "hakkimizda"
+        file: "hakkimizda.html"
+        fields:
+          - {label: "Başlık", name: "title", widget: "string"}
+          - {label: "İçerik", name: "content", widget: "markdown"}
+
+      - label: "Hizmetler"
+        name: "hizmetler"
+        file: "hizmetler.html"
+        fields:
+          - {label: "Başlık", name: "title", widget: "string"}
+          - {label: "İçerik", name: "content", widget: "markdown"}
