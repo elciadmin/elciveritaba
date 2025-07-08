@@ -1,0 +1,55 @@
+backend:
+  name: github
+  repo: elciadmin/elciveritaba  # REPO ADINIZ OTOMATİK EKLENDİ
+  branch: main                  # VARSILAN BRANCH
+
+# Medya Dosyaları Ayarları
+media_folder: "images/uploads"  # Yüklenen dosyaların kaydedileceği klasör
+public_folder: "/images/uploads" # Sitede gösterilecek yol
+
+# İçerik Koleksiyonları
+collections:
+  # BLOG YAZILARI
+  - name: "blog"
+    label: "Blog Yazıları"
+    folder: "_posts/blog"       # Dosyaların kaydedileceği klasör
+    create: true                # Yeni içerik eklemeyi aktif et
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Dosya adı formatı
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Tarih", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Kısa Açıklama", name: "excerpt", widget: "text" }
+      - { label: "İçerik", name: "body", widget: "markdown" }
+      - { label: "Kapak Resmi", name: "image", widget: "image" }
+      - label: "Kategoriler"
+        name: "categories"
+        widget: "list"
+        default: ["Genel"]
+
+  # SAYFALAR
+  - name: "sayfalar"
+    label: "Sayfalar"
+    folder: "_pages"            # Sayfalar için klasör
+    create: true
+    fields:
+      - { label: "Sayfa Başlığı", name: "title", widget: "string" }
+      - { label: "URL Yolu", name: "slug", widget: "string", hint: "ornek-seo-url" }
+      - { label: "Sıralama", name: "order", widget: "number", value_type: "int", default: 1 }
+      - { label: "İçerik", name: "body", widget: "markdown" }
+
+  # AYARLAR (Tekil veriler için)
+  - name: "ayarlar"
+    label: "Site Ayarları"
+    files:
+      - file: "_data/site.yml"   # Ayarların saklanacağı dosya
+        label: "Genel Ayarlar"
+        fields:
+          - { label: "Site Başlığı", name: "title", widget: "string" }
+          - { label: "Site Açıklaması", name: "description", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - label: "Sosyal Medya"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Twitter", name: "twitter", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
