@@ -1820,6 +1820,31 @@
                 font-size: 20px;
             }
         }
+        
+        /* PERSONEL GİRİŞİ LİNKİ STİLİ */
+        .admin-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #6a0ea1, #10b3d1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .admin-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #5a0d8f, #0e9cb8);
+        }
+        
+        .admin-link i {
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
@@ -2353,7 +2378,13 @@
                     <a href="https://twitter.com/elciveteriner" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.youtube.com/@El%C3%A7iveterinerklini%C4%9Fi" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
+                
+                <!-- PERSONEL GİRİŞİ LİNKİ EKLENDİ -->
+                <a href="https://elciveteriner.github.io/elciveritabani/adminAdmin/login.html" class="admin-link">
+                    <i class="fas fa-user-shield"></i> Personel Girişi
+                </a>
             </div>
+            
             <div class="footer-col">
                 <h3>Hızlı Linkler</h3>
                 <ul class="footer-links">
