@@ -11,7 +11,14 @@ if(!sessionStorage.getItem('adminLoggedIn')) {
         sessionStorage.setItem('adminLoggedIn', 'true');
     }
 }
+
+// Çıkış fonksiyonu
+function cikisYap() {
+    sessionStorage.removeItem('adminLoggedIn');
+    window.location.href = "login.html";
+}
 </script>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -392,6 +399,12 @@ if(!sessionStorage.getItem('adminLoggedIn')) {
             font-size: 14px;
             cursor: pointer;
             border: none;
+            transition: var(--transition);
+        }
+        
+        .card-header .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
         
         .chart-container {
@@ -482,6 +495,29 @@ if(!sessionStorage.getItem('adminLoggedIn')) {
             cursor: pointer;
         }
         
+        /* Çıkış Butonu Stilleri */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            z-index: 102;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.25);
+            transform: translateY(-2px);
+        }
+        
         /* Responsive Styles */
         @media (max-width: 1200px) {
             .row {
@@ -523,6 +559,12 @@ if(!sessionStorage.getItem('adminLoggedIn')) {
     </style>
 </head>
 <body>
+    <!-- Çıkış Butonu -->
+    <button class="logout-btn" onclick="cikisYap()">
+        <i class="fas fa-sign-out-alt"></i>
+        Çıkış Yap
+    </button>
+    
     <!-- Mobile Toggle -->
     <div class="mobile-toggle" id="mobileToggle">
         <i class="fas fa-bars"></i>
