@@ -357,7 +357,7 @@
                 <span>Özel Yetkili Personel Erişimi</span>
             </div>
             
-            <form class="login-form" action="dashboard.html" method="post">
+            <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label for="username">Yönetici Kodu</label>
                     <div class="input-with-icon">
@@ -401,17 +401,23 @@
             });
             
             // Form gönderimi
-            const loginForm = document.querySelector('.login-form');
+            const loginForm = document.getElementById('loginForm');
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Basit simülasyon - gerçek uygulamada sunucu doğrulaması yapılmalı
+                // Sabit giriş bilgileri
+                const correctUsername = "elciadmin";
+                const correctPassword = "elciadmin";
+                
+                // Kullanıcının girdiği değerler
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
                 
-                if(username === 'admin' && password === 'admin123') {
-                    // Başarılı giriş
-                    window.location.href = 'dashboard.html';
+                // Kontrol et
+                if(username === correctUsername && password === correctPassword) {
+                    // Giriş başarılı - panele yönlendir
+                    sessionStorage.setItem('adminLoggedIn', 'true');
+                    window.location.href = "dashboard.html";
                 } else {
                     // Hatalı giriş animasyonu
                     const inputs = document.querySelectorAll('.form-control');
@@ -422,7 +428,7 @@
                         }, 1000);
                     });
                     
-                    alert('Hatalı kullanıcı adı veya şifre! Lütfen tekrar deneyin.');
+                    alert('Hatalı kullanıcı adı veya şifre! Doğru bilgiler: elciadmin / elciadmin');
                 }
             });
         });
