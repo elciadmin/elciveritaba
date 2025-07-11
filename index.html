@@ -1845,6 +1845,79 @@
         .admin-link i {
             margin-right: 8px;
         }
+
+        /* PERSONEL GİRİŞİ STİLİ - EKLENDİ */
+        .admin-link-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .admin-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6a0ea1, #10b3d1);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(106, 14, 161, 0.3);
+            animation: pulse-purple 2s infinite;
+        }
+        
+        .admin-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 14, 161, 0.4);
+            background: linear-gradient(135deg, #5a0d8f, #0e9cb8);
+        }
+        
+        .admin-link i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* GitHub Pages Bilgi Paneli - EKLENDİ */
+        .github-pages-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 15px;
+            max-width: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--card-shadow);
+            z-index: 10;
+        }
+        
+        .github-pages-info h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .github-pages-info h4 i {
+            margin-right: 10px;
+        }
+        
+        .github-pages-info ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .github-pages-info li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .github-pages-info a {
+            color: var(--secondary);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -2112,6 +2185,24 @@
     <!-- İstatistik Paneli - Güncellenmiş Versiyon -->
     <section class="statistics-section">
         <div class="container">
+            <!-- GitHub Pages Bilgi Paneli - EKLENDİ -->
+            <div class="github-pages-info">
+                <h4><i class="fab fa-github"></i> GitHub Pages Yapılandırması</h4>
+                <p>Personel girişinin çalışması için:</p>
+                <ul>
+                    <li><strong>Source</strong>: GitHub Actions</li>
+                    <li><strong>Branch</strong>: main (veya master)</li>
+                    <li>Kök dizine <strong>.nojekyll</strong> dosyası ekleyin</li>
+                    <li><strong>_redirects</strong> dosyası içeriği:</li>
+                </ul>
+                <pre>/*    /index.html    200</pre>
+                <p>Test URL: 
+                    <a href="https://elciadmin.github.io/elciveritaba/adminAdmin/login.html" target="_blank">
+                        https://elciadmin.github.io/elciveritaba/adminAdmin/login.html
+                    </a>
+                </p>
+            </div>
+            
             <div class="page-title">
                 <h1>Klinik İstatistik Panosu</h1>
                 <p>2025 yılında gerçekleştirdiğimiz hizmetler ve başarı oranlarımız</p>
@@ -2379,10 +2470,13 @@
                     <a href="https://www.youtube.com/@El%C3%A7iveterinerklini%C4%9Fi" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
                 
-                <!-- PERSONEL GİRİŞİ LİNKİ DÜZELTİLDİ -->
-                <a href="https://elciveteriner.github.io/elciveritabani/adminAdmin/login.html" class="admin-link">
-                    <i class="fas fa-user-shield"></i> Personel Girişi
-                </a>
+                <!-- Personel Girişi Linki - GÜNCELLENDİ -->
+                <div class="admin-link-container">
+                    <a href="./adminAdmin/login.html" class="admin-link" id="personelGirisLink">
+                        <i class="fas fa-user-shield"></i> Personel Girişi
+                    </a>
+                    <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Sadece yetkili personel için</p>
+                </div>
             </div>
             
             <div class="footer-col">
@@ -3045,6 +3139,62 @@
             
             // İlk yükleme
             renderCalendar();
+
+            // PERSONEL GİRİŞİ LİNKİ İÇİN ÇÖZÜM - EKLENDİ
+            const personelGirisLink = document.getElementById('personelGirisLink');
+            
+            if (personelGirisLink) {
+                personelGirisLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Link durumunu göster
+                    const originalText = personelGirisLink.innerHTML;
+                    personelGirisLink.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yönlendiriliyor...';
+                    
+                    // Önce normal yolu deneyelim
+                    fetch('./adminAdmin/login.html')
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = './adminAdmin/login.html';
+                            } else {
+                                // Normal yol çalışmazsa alternatif yolu deneyelim
+                                return fetch('adminAdmin/login.html');
+                            }
+                        })
+                        .then(response2 => {
+                            if (response2 && response2.ok) {
+                                window.location.href = 'adminAdmin/login.html';
+                            } else {
+                                // Her ikisi de çalışmazsa GitHub Pages URL'sini kullan
+                                const repoName = 'elciveritaba'; // GitHub repo adınız
+                                const userName = 'elciadmin'; // GitHub kullanıcı adınız
+                                window.location.href = `https://${userName}.github.io/${repoName}/adminAdmin/login.html`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Personel girişi hatası:', error);
+                            // Tüm seçenekler başarısız olursa kullanıcıyı bilgilendir
+                            personelGirisLink.innerHTML = originalText;
+                            alert('Personel giriş sayfası bulunamadı. Lütfen daha sonra tekrar deneyin veya yöneticiyle iletişime geçin.');
+                        });
+                });
+            }
+            
+            // GitHub Pages yapılandırma bilgilerini göster/gizle
+            const githubInfo = document.querySelector('.github-pages-info');
+            if (githubInfo) {
+                githubInfo.addEventListener('click', function() {
+                    this.style.display = 'none';
+                });
+                
+                // 10 saniye sonra otomatik gizle
+                setTimeout(() => {
+                    githubInfo.style.opacity = '0';
+                    setTimeout(() => {
+                        githubInfo.style.display = 'none';
+                    }, 500);
+                }, 10000);
+            }
         });
     </script>
 </body>
