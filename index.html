@@ -2185,7 +2185,7 @@
     <!-- İstatistik Paneli - Güncellenmiş Versiyon -->
     <section class="statistics-section">
         <div class="container">
-            <!-- GitHub Pages Bilgi Paneli - EKLENDİ -->
+            <!-- GitHub Pages Bilgi Paneli - GÜNCELLENDİ -->
             <div class="github-pages-info">
                 <h4><i class="fab fa-github"></i> GitHub Pages Yapılandırması</h4>
                 <p>Personel girişinin çalışması için:</p>
@@ -2197,8 +2197,8 @@
                 </ul>
                 <pre>/*    /index.html    200</pre>
                 <p>Test URL: 
-                    <a href="https://elciadmin.github.io/elciveritaba/adminAdmin/login.html" target="_blank">
-                        https://elciadmin.github.io/elciveritaba/adminAdmin/login.html
+                    <a href="https://elciadmin.github.io/elciveritaba/admin/login.html" target="_blank">
+                        https://elciadmin.github.io/elciveritaba/admin/login.html
                     </a>
                 </p>
             </div>
@@ -2472,7 +2472,7 @@
                 
                 <!-- Personel Girişi Linki - GÜNCELLENDİ -->
                 <div class="admin-link-container">
-                    <a href="./adminAdmin/login.html" class="admin-link" id="personelGirisLink">
+                    <a href="./admin/login.html" class="admin-link" id="personelGirisLink">
                         <i class="fas fa-user-shield"></i> Personel Girişi
                     </a>
                     <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Sadece yetkili personel için</p>
@@ -3140,7 +3140,7 @@
             // İlk yükleme
             renderCalendar();
 
-            // PERSONEL GİRİŞİ LİNKİ İÇİN ÇÖZÜM - EKLENDİ
+            // PERSONEL GİRİŞİ LİNKİ İÇİN ÇÖZÜM - GÜNCELLENDİ
             const personelGirisLink = document.getElementById('personelGirisLink');
             
             if (personelGirisLink) {
@@ -3151,32 +3151,80 @@
                     const originalText = personelGirisLink.innerHTML;
                     personelGirisLink.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yönlendiriliyor...';
                     
-                    // Önce normal yolu deneyelim
-                    fetch('./adminAdmin/login.html')
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = './adminAdmin/login.html';
+                    // Denenecek URL'ler (tüm olasılıkları kapsayacak şekilde)
+                    const urlVariations = [
+                        './admin/login.html',
+                        'admin/login.html',
+                        './adminAdmin/login.html',
+                        'adminAdmin/login.html',
+                        './adminyönetici/login.html',
+                        'adminyönetici/login.html'
+                    ];
+                    
+                    // GitHub Pages URL'leri
+                    const repoName = 'elciveritaba';
+                    const userName = 'elciadmin';
+                    const githubUrls = [
+                        `https://${userName}.github.io/${repoName}/admin/login.html`,
+                        `https://${userName}.github.io/${repoName}/adminAdmin/login.html`,
+                        `https://${userName}.github.io/${repoName}/adminyönetici/login.html`,
+                        `https://${userName}.github.io/${repoName}/adminy%C3%B6netici/login.html`
+                    ];
+                    
+                    // Önce lokal URL'leri dene
+                    let urlIndex = 0;
+                    
+                    const tryNextUrl = () => {
+                        if (urlIndex < urlVariations.length) {
+                            fetch(urlVariations[urlIndex])
+                                .then(response => {
+                                    if (response.ok) {
+                                        window.location.href = urlVariations[urlIndex];
+                                    } else {
+                                        urlIndex++;
+                                        tryNextUrl();
+                                    }
+                                })
+                                .catch(() => {
+                                    urlIndex++;
+                                    tryNextUrl();
+                                });
+                        } else {
+                            // Tüm lokal URL'ler başarısız oldu, GitHub Pages URL'lerini dene
+                            tryGitHubUrls();
+                        }
+                    };
+                    
+                    const tryGitHubUrls = () => {
+                        let githubIndex = 0;
+                        
+                        const tryNextGitHubUrl = () => {
+                            if (githubIndex < githubUrls.length) {
+                                fetch(githubUrls[githubIndex])
+                                    .then(response => {
+                                        if (response.ok) {
+                                            window.location.href = githubUrls[githubIndex];
+                                        } else {
+                                            githubIndex++;
+                                            tryNextGitHubUrl();
+                                        }
+                                    })
+                                    .catch(() => {
+                                        githubIndex++;
+                                        tryNextGitHubUrl();
+                                    });
                             } else {
-                                // Normal yol çalışmazsa alternatif yolu deneyelim
-                                return fetch('adminAdmin/login.html');
+                                // Tüm seçenekler başarısız oldu
+                                personelGirisLink.innerHTML = originalText;
+                                alert('Personel giriş sayfası bulunamadı. Lütfen daha sonra tekrar deneyin veya yöneticiyle iletişime geçin.');
                             }
-                        })
-                        .then(response2 => {
-                            if (response2 && response2.ok) {
-                                window.location.href = 'adminAdmin/login.html';
-                            } else {
-                                // Her ikisi de çalışmazsa GitHub Pages URL'sini kullan
-                                const repoName = 'elciveritaba'; // GitHub repo adınız
-                                const userName = 'elciadmin'; // GitHub kullanıcı adınız
-                                window.location.href = `https://${userName}.github.io/${repoName}/adminAdmin/login.html`;
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Personel girişi hatası:', error);
-                            // Tüm seçenekler başarısız olursa kullanıcıyı bilgilendir
-                            personelGirisLink.innerHTML = originalText;
-                            alert('Personel giriş sayfası bulunamadı. Lütfen daha sonra tekrar deneyin veya yöneticiyle iletişime geçin.');
-                        });
+                        };
+                        
+                        tryNextGitHubUrl();
+                    };
+                    
+                    // İlk URL'yi denemeye başla
+                    tryNextUrl();
                 });
             }
             
