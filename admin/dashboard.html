@@ -5,1217 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elçi Veteriner | Yönetim Paneli</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* Basit admin paneli stili */
         :root {
             --primary: #6a0ea1;
             --secondary: #10b3d1;
-            --accent: #ff7e5f;
             --light: #f8fafc;
             --dark: #1e293b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-            --sidebar-bg: #2c3e50;
-            --sidebar-width: 280px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f0f2f5;
+            background: #f5f7fa;
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-        }
-        
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--sidebar-bg);
-            color: white;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            transition: var(--transition);
-            overflow-y: auto;
         }
         
-        .logo-area {
-            padding: 25px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .logo-area h1 {
-            font-size: 24px;
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .logo-area span {
-            font-size: 14px;
-            opacity: 0.7;
-        }
-        
-        .admin-info {
-            display: flex;
-            align-items: center;
             padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
         
-        .admin-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--secondary);
+        .dashboard-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-right: 15px;
+            flex: 1;
         }
         
-        .admin-details h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .admin-details span {
-            font-size: 13px;
-            opacity: 0.8;
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         
         .sidebar-menu {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
+            list-style: none;
         }
         
-        .menu-title {
-            padding: 10px 20px;
-            font-size: 13px;
-            text-transform: uppercase;
-            opacity: 0.6;
-            letter-spacing: 1px;
-            margin-top: 15px;
+        .sidebar-menu li {
+            margin-bottom: 10px;
         }
         
-        .menu-item {
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-            cursor: pointer;
-            border-left: 3px solid transparent;
-        }
-        
-        .menu-item:hover, .menu-item.active {
-            background: rgba(0, 0, 0, 0.2);
-            border-left: 3px solid var(--secondary);
-        }
-        
-        .menu-item i {
-            width: 30px;
-            font-size: 18px;
-            opacity: 0.8;
-            margin-right: 10px;
-        }
-        
-        .menu-item span {
-            font-size: 15px;
-        }
-        
-        .menu-item .badge {
-            margin-left: auto;
-            background: var(--danger);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        .sidebar-footer {
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-            opacity: 0.7;
-            text-align: center;
-        }
-        
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            padding: 20px;
-        }
-        
-        .header {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .page-title h2 {
-            font-size: 24px;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .page-title p {
-            font-size: 14px;
-            color: #64748b;
-        }
-        
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .search-bar {
-            position: relative;
-        }
-        
-        .search-bar input {
-            padding: 10px 15px 10px 40px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            width: 250px;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-        
-        .search-bar input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(106, 14, 161, 0.2);
-        }
-        
-        .search-bar i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-        }
-        
-        .notification-btn, .user-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f2f5;
-            color: var(--dark);
-            position: relative;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .notification-btn:hover, .user-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .notification-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--danger);
-            color: white;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .user-btn img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        /* Content Pages */
-        .content-page {
-            display: none;
-        }
-        
-        .content-page.active {
+        .sidebar-menu a {
             display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #555;
-        }
-        
-        .form-control {
-            width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
+            background: #f0e6ff;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
         
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(106, 14, 161, 0.2);
-        }
-        
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            transition: var(--transition);
-            text-align: center;
-        }
-        
-        .btn-primary {
+        .sidebar-menu a:hover, .sidebar-menu a.active {
             background: var(--primary);
             color: white;
         }
         
-        .btn-primary:hover {
-            background: #5a0d8f;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-secondary {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #0e9cb8;
-            transform: translateY(-3px);
-        }
-        
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background: #c0392b;
-            transform: translateY(-3px);
-        }
-        
-        .section-form {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 25px;
-        }
-        
-        .section-form h3 {
-            font-size: 20px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .image-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .image-preview {
-            width: 150px;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            border: 2px dashed #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .image-preview .placeholder {
-            color: #999;
-            font-size: 14px;
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
             text-align: center;
-            padding: 10px;
         }
         
-        .image-actions {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
+        .main-content {
+            flex: 1;
+            padding: 30px;
         }
         
-        .image-actions button {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
         
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-                z-index: 1000;
-            }
-            
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .mobile-toggle {
-                display: flex;
-            }
-            
-            .search-bar input {
-                width: 180px;
-            }
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .dashboard-card i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .admin-footer {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
         }
         
         @media (max-width: 768px) {
-            .header {
+            .dashboard-container {
                 flex-direction: column;
-                gap: 15px;
             }
-            
-            .header-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .search-bar {
-                flex: 1;
-            }
-            
-            .search-bar input {
+            .sidebar {
                 width: 100%;
             }
-            
-            .dashboard-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Mobile Toggle */
-        .mobile-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 101;
-            background: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
-        
-        /* Çıkış Butonu Stilleri */
-        .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            z-index: 102;
-        }
-        
-        .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.25);
-            transform: translateY(-2px);
-        }
-        
-        /* Content Tabs */
-        .content-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .content-tab {
-            padding: 10px 20px;
-            background: #e0e7ff;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .content-tab.active {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .content-tab:hover {
-            background: var(--secondary);
-            color: white;
         }
     </style>
 </head>
 <body>
-    <!-- Çıkış Butonu -->
-    <button class="logout-btn" onclick="cikisYap()">
-        <i class="fas fa-sign-out-alt"></i>
-        Çıkış Yap
-    </button>
+    <header class="admin-header">
+        <h1><i class="fas fa-cogs"></i> Elçi Veteriner Yönetim Paneli</h1>
+    </header>
     
-    <!-- Mobile Toggle -->
-    <div class="mobile-toggle" id="mobileToggle">
-        <i class="fas fa-bars"></i>
-    </div>
-    
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="logo-area">
-            <h1>Elçi Veteriner</h1>
-            <span>Yönetim Paneli</span>
-        </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="../admin_panel.html"><i class="fas fa-home"></i> Ana Sayfa Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> İstatistik Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-medical"></i> Hizmet Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-comments"></i> Yorum Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Kullanıcı Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Ayarlar</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
+            </ul>
+        </aside>
         
-        <div class="admin-info">
-            <div class="admin-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="admin-details">
-                <h3>Mehmet Elçi</h3>
-                <span>Yönetici</span>
-            </div>
-        </div>
-        
-        <div class="sidebar-menu">
-            <div class="menu-item active" data-target="dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Genel Bakış</span>
-            </div>
+        <main class="main-content">
+            <h2>Yönetim Paneline Hoş Geldiniz</h2>
+            <p>Sol menüden istediğiniz bölüme erişebilir ve içerikleri düzenleyebilirsiniz.</p>
             
-            <div class="menu-title">Ana Sayfa Bölümleri</div>
-            
-            <div class="menu-item" data-target="hero">
-                <i class="fas fa-star"></i>
-                <span>Hero Bölümü</span>
-            </div>
-            
-            <div class="menu-item" data-target="services">
-                <i class="fas fa-hands-helping"></i>
-                <span>Hizmetler</span>
-            </div>
-            
-            <div class="menu-item" data-target="about">
-                <i class="fas fa-info-circle"></i>
-                <span>Hakkımızda</span>
-            </div>
-            
-            <div class="menu-item" data-target="features">
-                <i class="fas fa-thumbs-up"></i>
-                <span>Özellikler</span>
-            </div>
-            
-            <div class="menu-item" data-target="statistics">
-                <i class="fas fa-chart-bar"></i>
-                <span>İstatistikler</span>
-            </div>
-            
-            <div class="menu-item" data-target="testimonials">
-                <i class="fas fa-comments"></i>
-                <span>Müşteri Yorumları</span>
-            </div>
-            
-            <div class="menu-item" data-target="contact">
-                <i class="fas fa-address-book"></i>
-                <span>İletişim</span>
-            </div>
-            
-            <div class="menu-title">Diğer Sayfalar</div>
-            
-            <div class="menu-item" data-target="about-page">
-                <i class="fas fa-users"></i>
-                <span>Hakkımızda Sayfası</span>
-            </div>
-            
-            <div class="menu-item" data-target="services-page">
-                <i class="fas fa-concierge-bell"></i>
-                <span>Hizmetler Sayfası</span>
-            </div>
-            
-            <div class="menu-item" data-target="gallery">
-                <i class="fas fa-images"></i>
-                <span>Galeri</span>
-            </div>
-            
-            <div class="menu-title">Ayarlar</div>
-            
-            <div class="menu-item" data-target="settings">
-                <i class="fas fa-cog"></i>
-                <span>Sistem Ayarları</span>
-            </div>
-            
-            <div class="menu-item" data-target="users">
-                <i class="fas fa-user-cog"></i>
-                <span>Kullanıcı Yönetimi</span>
-            </div>
-        </div>
-        
-        <div class="sidebar-footer">
-            &copy; 2023 Elçi Veteriner Kliniği
-        </div>
-    </div>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <div class="page-title">
-                <h2 id="currentPageTitle">Genel Bakış</h2>
-                <p id="currentPageDesc">Yönetim paneli ana sayfası</p>
-            </div>
-            
-            <div class="header-actions">
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Ara...">
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Ana Sayfa Yönetimi</h3>
+                    <p>Ana sayfa içeriğini düzenleyin</p>
+                    <a href="../admin_panel.html" class="btn" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 5px; text-decoration: none;">Panele Git</a>
                 </div>
                 
-                <div class="notification-btn">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
+                <div class="dashboard-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>İstatistik Yönetimi</h3>
+                    <p>İstatistik verilerini güncelleyin</p>
                 </div>
                 
-                <div class="user-btn">
-                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Admin">
+                <div class="dashboard-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Randevu Yönetimi</h3>
+                    <p>Randevuları görüntüleyin ve yönetin</p>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Dashboard Page -->
-        <div id="dashboard" class="content-page active">
-            <div class="section-form">
-                <h3>Hoş Geldiniz</h3>
-                <p>Bu yönetim paneli aracılığıyla web sitenizin tüm bölümlerini düzenleyebilirsiniz.</p>
-                <p>Sol taraftaki menüden düzenlemek istediğiniz bölümü seçin.</p>
-                
-                <div class="image-preview-container">
-                    <div class="image-preview">
-                        <div class="placeholder">Önizleme</div>
-                    </div>
-                    <div class="image-preview">
-                        <div class="placeholder">Önizleme</div>
-                    </div>
-                    <div class="image-preview">
-                        <div class="placeholder">Önizleme</div>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary" style="margin-top: 20px;">
-                    <i class="fas fa-sync-alt"></i> Son Değişiklikleri Yükle
-                </button>
             </div>
             
-            <div class="section-form">
-                <h3>Son Değişiklikler</h3>
+            <div class="recent-activity">
+                <h3>Son Aktivite</h3>
                 <ul>
-                    <li>Dün 18:32 - Hero bölümü başlığı güncellendi</li>
-                    <li>Dün 14:15 - Hizmetler bölümüne yeni hizmet eklendi</li>
-                    <li>2 gün önce - İletişim bilgileri güncellendi</li>
+                    <li>5 dakika önce - Ana sayfa başlığı güncellendi</li>
+                    <li>2 saat önce - 3 yeni yorum onaylandı</li>
+                    <li>1 gün önce - İstatistik verileri güncellendi</li>
                 </ul>
             </div>
-        </div>
-        
-        <!-- Hero Section Editor -->
-        <div id="hero" class="content-page">
-            <div class="section-form">
-                <h3>Hero Bölümü Düzenleme</h3>
-                
-                <div class="form-group">
-                    <label>Ana Başlık</label>
-                    <input type="text" id="hero-title" class="form-control" 
-                           placeholder="Evcil Dostlarınız İçin Profesyonel Veteriner Hizmeti">
-                </div>
-                
-                <div class="form-group">
-                    <label>Açıklama</label>
-                    <textarea id="hero-description" class="form-control" rows="3"
-                              placeholder="Konya'nın Meram ilçesinde, hayvan sağlığı alanında uzman ekibimizle 7/24 kesintisiz hizmet veriyoruz..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>Arkaplan Görseli URL</label>
-                    <input type="text" id="hero-bg-image" class="form-control" 
-                           placeholder="https://example.com/resim.jpg">
-                </div>
-                
-                <div class="image-preview-container">
-                    <div class="image-preview">
-                        <div class="placeholder">Görsel önizleme burada görünecek</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Buton 1 Metni</label>
-                    <input type="text" id="hero-btn1-text" class="form-control" value="Hemen Randevu Al">
-                </div>
-                
-                <div class="form-group">
-                    <label>Buton 2 Metni</label>
-                    <input type="text" id="hero-btn2-text" class="form-control" value="Acil Çağrı">
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-save"></i> Hero Bölümünü Kaydet
-                </button>
-            </div>
-        </div>
-        
-        <!-- Services Section Editor -->
-        <div id="services" class="content-page">
-            <div class="section-form">
-                <h3>Hizmetler Bölümü Düzenleme</h3>
-                
-                <div class="content-tabs">
-                    <div class="content-tab active">Hizmetleri Düzenle</div>
-                    <div class="content-tab">Yeni Hizmet Ekle</div>
-                    <div class="content-tab">Görsel Ayarları</div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Bölüm Başlığı</label>
-                    <input type="text" class="form-control" value="Veteriner Hizmetlerimiz">
-                </div>
-                
-                <div class="form-group">
-                    <label>Bölüm Açıklaması</label>
-                    <textarea class="form-control" rows="2">Evcil dostlarınıza sunduğumuz kapsamlı sağlık hizmetleri</textarea>
-                </div>
-                
-                <h4>Hizmet Listesi</h4>
-                
-                <div class="service-form">
-                    <div class="form-group">
-                        <label>Hizmet Adı</label>
-                        <input type="text" class="form-control" value="Acil Veteriner Hizmetleri">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Hizmet Açıklaması</label>
-                        <textarea class="form-control" rows="2">7/24 kesintisiz acil veteriner hizmeti. Gece gündüz demeden dostunuzun yardımına koşuyoruz.</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>İkon Seçimi</label>
-                        <select class="form-control">
-                            <option value="fa-ambulance" selected>Ambulans</option>
-                            <option value="fa-heartbeat">Kalp Atışı</option>
-                            <option value="fa-stethoscope">Steteskop</option>
-                        </select>
-                    </div>
-                    
-                    <div class="image-preview-container">
-                        <div class="image-preview">
-                            <div class="placeholder">Hizmet Görseli</div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Bu Hizmeti Sil
-                    </button>
-                </div>
-                
-                <div class="service-form">
-                    <div class="form-group">
-                        <label>Hizmet Adı</label>
-                        <input type="text" class="form-control" value="Koruyucu Hekimlik">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Hizmet Açıklaması</label>
-                        <textarea class="form-control" rows="2">Aşı programları, parazit tedavileri ve rutin kontrollerle dostunuzun sağlığını koruyoruz.</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>İkon Seçimi</label>
-                        <select class="form-control">
-                            <option value="fa-syringe" selected>Şırınga</option>
-                            <option value="fa-shield-alt">Kalkan</option>
-                            <option value="fa-heart">Kalp</option>
-                        </select>
-                    </div>
-                    
-                    <div class="image-preview-container">
-                        <div class="image-preview">
-                            <div class="placeholder">Hizmet Görseli</div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Bu Hizmeti Sil
-                    </button>
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus-circle"></i> Yeni Hizmet Ekle
-                </button>
-                
-                <button class="btn btn-primary" style="margin-top: 20px;">
-                    <i class="fas fa-save"></i> Tüm Hizmetleri Kaydet
-                </button>
-            </div>
-        </div>
-        
-        <!-- About Section Editor -->
-        <div id="about" class="content-page">
-            <div class="section-form">
-                <h3>Hakkımızda Bölümü Düzenleme</h3>
-                
-                <div class="form-group">
-                    <label>Bölüm Başlığı</label>
-                    <input type="text" class="form-control" value="Elçi Veteriner Kliniği Hakkında">
-                </div>
-                
-                <div class="form-group">
-                    <label>İçerik</label>
-                    <textarea class="form-control" rows="5">2013 yılında Konya Meram'da kurulan kliniğimiz, hayvan sağlığı alanında uzman veteriner hekimlerden oluşan ekibimizle hizmet vermektedir. 300m² alana kurulu modern tesisimizde, en son teknoloji ekipmanlarla evcil dostlarınıza en iyi sağlık hizmetini sunuyoruz.
-
-Kurucumuz Veteriner Hekim Mehmet Elçi'nin 20 yılı aşkın tecrübesi ve hayvan sevgisi, kliniğimizin temelini oluşturur. Ekibimiz, sürekli eğitimlerle kendini geliştirerek hayvan sağlığı alanındaki yenilikleri takip etmektedir.</textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>Görsel URL</label>
-                    <input type="text" class="form-control" 
-                           placeholder="https://example.com/hakkimizda-gorseli.jpg">
-                </div>
-                
-                <div class="image-preview-container">
-                    <div class="image-preview">
-                        <div class="placeholder">Hakkımızda Görseli</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Buton Metni</label>
-                    <input type="text" class="form-control" value="Kliniğimizi Tanıyın">
-                </div>
-                
-                <div class="form-group">
-                    <label>Buton Linki</label>
-                    <input type="text" class="form-control" value="hakkimizda.html">
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-save"></i> Hakkımızda Bölümünü Kaydet
-                </button>
-            </div>
-        </div>
-        
-        <!-- Gallery Editor -->
-        <div id="gallery" class="content-page">
-            <div class="section-form">
-                <h3>Galeri Yönetimi</h3>
-                <p>Web sitenizdeki galeri bölümünü buradan düzenleyebilirsiniz.</p>
-                
-                <div class="content-tabs">
-                    <div class="content-tab active">Tüm Görseller</div>
-                    <div class="content-tab">Yeni Görsel Ekle</div>
-                    <div class="content-tab">Albümler</div>
-                </div>
-                
-                <div class="image-preview-container">
-                    <div class="image-preview">
-                        <img src="https://via.placeholder.com/300" alt="Gallery image">
-                        <div class="image-actions">
-                            <button title="Düzenle"><i class="fas fa-edit"></i></button>
-                            <button title="Sil"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    
-                    <div class="image-preview">
-                        <img src="https://via.placeholder.com/300" alt="Gallery image">
-                        <div class="image-actions">
-                            <button title="Düzenle"><i class="fas fa-edit"></i></button>
-                            <button title="Sil"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    
-                    <div class="image-preview">
-                        <img src="https://via.placeholder.com/300" alt="Gallery image">
-                        <div class="image-actions">
-                            <button title="Düzenle"><i class="fas fa-edit"></i></button>
-                            <button title="Sil"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    
-                    <div class="image-preview">
-                        <div class="placeholder">Yeni Görsel Ekle</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Yeni Görsel Ekle</label>
-                    <input type="file" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label>Görsel Başlığı</label>
-                    <input type="text" class="form-control" placeholder="Görsel başlığı">
-                </div>
-                
-                <div class="form-group">
-                    <label>Görsel Açıklaması</label>
-                    <textarea class="form-control" placeholder="Görsel açıklaması"></textarea>
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-upload"></i> Görseli Yükle
-                </button>
-            </div>
-        </div>
-        
-        <!-- Settings Page -->
-        <div id="settings" class="content-page">
-            <div class="section-form">
-                <h3>Sistem Ayarları</h3>
-                
-                <div class="form-group">
-                    <label>Site Başlığı</label>
-                    <input type="text" class="form-control" value="Elçi Veteriner Kliniği">
-                </div>
-                
-                <div class="form-group">
-                    <label>Site Açıklaması</label>
-                    <textarea class="form-control" rows="2">Konya'da Profesyonel Veteriner Hizmetleri</textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>Site Logo URL</label>
-                    <input type="text" class="form-control" 
-                           placeholder="https://example.com/logo.png">
-                </div>
-                
-                <div class="form-group">
-                    <label>Favicon URL</label>
-                    <input type="text" class="form-control" 
-                           placeholder="https://example.com/favicon.ico">
-                </div>
-                
-                <div class="form-group">
-                    <label>Telefon Numarası</label>
-                    <input type="text" class="form-control" value="0332 322 32 20">
-                </div>
-                
-                <div class="form-group">
-                    <label>E-posta Adresi</label>
-                    <input type="email" class="form-control" value="elcivetklinig@gmail.com">
-                </div>
-                
-                <div class="form-group">
-                    <label>Adres</label>
-                    <textarea class="form-control" rows="2">Havzan Mah. Yeni Meram Cad. 17/1 Meram/Konya</textarea>
-                </div>
-                
-                <h4>Çalışma Saatleri</h4>
-                
-                <div class="form-group">
-                    <label>Hafta İçi</label>
-                    <input type="text" class="form-control" value="08:00 - 19:00">
-                </div>
-                
-                <div class="form-group">
-                    <label>Cumartesi</label>
-                    <input type="text" class="form-control" value="09:00 - 17:00">
-                </div>
-                
-                <div class="form-group">
-                    <label>Pazar</label>
-                    <input type="text" class="form-control" value="Acil Hizmet">
-                </div>
-                
-                <button class="btn btn-primary">
-                    <i class="fas fa-save"></i> Ayarları Kaydet
-                </button>
-            </div>
-        </div>
+        </main>
     </div>
-
-    <script>
-        // Dashboard güvenlik kontrolü
-        if(!sessionStorage.getItem('adminLoggedIn')) {
-            const enteredUsername = prompt("Kullanıcı Adı:");
-            const enteredPassword = prompt("Şifre:");
-            
-            if(enteredUsername !== "elciadmin" || enteredPassword !== "elciadmin") {
-                alert("Yetkisiz erişim!");
-                window.location.href = "login.html";
-            } else {
-                sessionStorage.setItem('adminLoggedIn', 'true');
-            }
-        }
-
-        // Çıkış fonksiyonu
-        function cikisYap() {
-            sessionStorage.removeItem('adminLoggedIn');
-            window.location.href = "login.html";
-        }
-
-        // Sayfa geçişleri
-        function initPageSwitching() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const contentPages = document.querySelectorAll('.content-page');
-            const pageTitle = document.getElementById('currentPageTitle');
-            const pageDesc = document.getElementById('currentPageDesc');
-            
-            // Sayfa başlıkları
-            const pageTitles = {
-                'dashboard': 'Genel Bakış',
-                'hero': 'Hero Bölümü Düzenleme',
-                'services': 'Hizmetler Bölümü Düzenleme',
-                'about': 'Hakkımızda Bölümü Düzenleme',
-                'features': 'Özellikler Bölümü Düzenleme',
-                'statistics': 'İstatistikler Bölümü Düzenleme',
-                'testimonials': 'Müşteri Yorumları Düzenleme',
-                'contact': 'İletişim Bölümü Düzenleme',
-                'about-page': 'Hakkımızda Sayfası Düzenleme',
-                'services-page': 'Hizmetler Sayfası Düzenleme',
-                'gallery': 'Galeri Yönetimi',
-                'settings': 'Sistem Ayarları',
-                'users': 'Kullanıcı Yönetimi'
-            };
-            
-            const pageDescriptions = {
-                'dashboard': 'Yönetim paneli ana sayfası',
-                'hero': 'Ana sayfanın üst bölümünü düzenleyin',
-                'services': 'Hizmetler bölümünü düzenleyin',
-                'about': 'Hakkımızda bölümünü düzenleyin',
-                'features': 'Özellikler bölümünü düzenleyin',
-                'statistics': 'İstatistikler bölümünü düzenleyin',
-                'testimonials': 'Müşteri yorumlarını düzenleyin',
-                'contact': 'İletişim bölümünü düzenleyin',
-                'about-page': 'Hakkımızda sayfasını düzenleyin',
-                'services-page': 'Hizmetler sayfasını düzenleyin',
-                'gallery': 'Galeri görsellerini yönetin',
-                'settings': 'Sistem ayarlarını düzenleyin',
-                'users': 'Kullanıcı hesaplarını yönetin'
-            };
-            
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const target = this.getAttribute('data-target');
-                    
-                    // Menü öğelerini güncelle
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // İçerik sayfalarını güncelle
-                    contentPages.forEach(page => page.classList.remove('active'));
-                    document.getElementById(target).classList.add('active');
-                    
-                    // Sayfa başlığını ve açıklamasını güncelle
-                    pageTitle.textContent = pageTitles[target] || 'Yönetim Paneli';
-                    pageDesc.textContent = pageDescriptions[target] || 'Sayfa içeriği düzenleme';
-                });
-            });
-        }
-
-        // Mobile menu toggle
-        function initMobileMenu() {
-            const mobileToggle = document.getElementById('mobileToggle');
-            const sidebar = document.getElementById('sidebar');
-            
-            mobileToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-        }
-
-        // Görsel önizleme
-        function initImagePreview() {
-            const imageInputs = document.querySelectorAll('input[type="text"][id$="image"]');
-            
-            imageInputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    const preview = this.closest('.form-group').nextElementSibling;
-                    const img = preview.querySelector('img');
-                    const placeholder = preview.querySelector('.placeholder');
-                    
-                    if (this.value) {
-                        if (!img) {
-                            const imgElement = document.createElement('img');
-                            imgElement.src = this.value;
-                            preview.innerHTML = '';
-                            preview.appendChild(imgElement);
-                            
-                            const actions = document.createElement('div');
-                            actions.className = 'image-actions';
-                            actions.innerHTML = `
-                                <button title="Düzenle"><i class="fas fa-edit"></i></button>
-                                <button title="Sil"><i class="fas fa-trash"></i></button>
-                            `;
-                            preview.appendChild(actions);
-                        } else {
-                            img.src = this.value;
-                        }
-                    } else {
-                        preview.innerHTML = '<div class="placeholder">Görsel önizleme burada görünecek</div>';
-                    }
-                });
-            });
-        }
-
-        // Form kaydetme
-        function initFormSave() {
-            const saveButtons = document.querySelectorAll('.btn-primary');
-            
-            saveButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const section = this.closest('.section-form');
-                    const sectionTitle = section.querySelector('h3').textContent;
-                    
-                    // Animasyonlu kaydetme efekti
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Kaydediliyor...';
-                    this.disabled = true;
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.disabled = false;
-                        
-                        // Başarı mesajı
-                        const successMsg = document.createElement('div');
-                        successMsg.style.background = 'var(--success)';
-                        successMsg.style.color = 'white';
-                        successMsg.style.padding = '10px';
-                        successMsg.style.borderRadius = '5px';
-                        successMsg.style.marginTop = '10px';
-                        successMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${sectionTitle} başarıyla kaydedildi!`;
-                        
-                        this.parentNode.insertBefore(successMsg, this.nextSibling);
-                        
-                        // Mesajı 3 saniye sonra kaldır
-                        setTimeout(() => {
-                            successMsg.remove();
-                        }, 3000);
-                    }, 1500);
-                });
-            });
-        }
-
-        // Sayfa yüklendiğinde
-        document.addEventListener('DOMContentLoaded', function() {
-            initPageSwitching();
-            initMobileMenu();
-            initImagePreview();
-            initFormSave();
-            
-            // Mobil için başlangıçta menüyü gizle
-            if (window.innerWidth <= 992) {
-                document.querySelector('.sidebar').classList.remove('active');
-                document.querySelector('.mobile-toggle').style.display = 'flex';
-            }
-            
-            // Varsayılan içeriği yükle
-            loadContent();
-        });
-
-        // Site içeriğini yükle
-        function loadContent() {
-            const savedContent = JSON.parse(localStorage.getItem('websiteContent'));
-            if (savedContent) {
-                // Hero bölümü
-                document.getElementById('hero-title').value = savedContent.hero.title;
-                document.getElementById('hero-description').value = savedContent.hero.description;
-                document.getElementById('hero-bg-image').value = savedContent.hero.imageUrl;
-                
-                // Hizmetler
-                // Bu kısımda hizmetleri doldurma kodu olacak
-            } else {
-                // Varsayılan içeriği göster
-                document.getElementById('hero-title').value = "Evcil Dostlarınız İçin Profesyonel Veteriner Hizmeti";
-                document.getElementById('hero-description').value = "Konya'nın Meram ilçesinde, hayvan sağlığı alanında uzman ekibimizle 7/24 kesintisiz hizmet veriyoruz. Sevimli dostlarınızın sağlığı bizim için öncelikli!";
-                
-                // Varsayılan görsel
-                document.getElementById('hero-bg-image').value = "https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80";
-            }
-        }
-    </script>
+    
+    <footer class="admin-footer">
+        <p>© 2023 Elçi Veteriner Kliniği | Yönetim Paneli v1.0</p>
+    </footer>
 </body>
 </html>
