@@ -1,75 +1,16 @@
-# Yönetim paneli için temel güvenlik önlemleri
+# YÖNETİM PANELİ GÜVENLİĞİ
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
+
+# EĞER GITHUB PAGES KULLANIYORSANIZ BU KISMI KULLANIN
+# GitHub Pages .htaccess desteklemez, bu nedenle alternatif çözüm:
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-
-    # 1. Dizin listeleme engelleme
-    Options -Indexes
-
-    # 2. Hassas dosyalara erişimi engelleme
-    <FilesMatch "(\.(bak|config|sql|fla|psd|log|sh|inc|swp|dist)|~)$">
-        Order allow,deny
-        Deny from all
-        Satisfy All
-    </FilesMatch>
-
-    # 3. IP Kısıtlama (Yalnızca yetkili IP'ler)
-    # Örnek: Allow from 192.168.1.100
-    # Gerçek IP adresinizle değiştirin
-    <RequireAny>
-        # Yönetici IP adresinizi buraya ekleyin
-        Require ip 123.45.67.89
-        Require ip 192.168.1.0/24  # Yerel ağ erişimi için
-    </RequireAny>
-
-    # 4. Yönetim paneli için ek kimlik doğrulaması
-    AuthType Basic
-    AuthName "Yönetim Paneli Erişimi"
-    AuthUserFile /absolute/path/to/.htpasswd  # Mutlak yol belirtin
-    Require valid-user
-
-    # 5. Gizli dizinlere erişimi engelleme
-    RedirectMatch 404 /\..*$
-
-    # 6. Hata sayfalarını özelleştirme
-    ErrorDocument 400 /admin/errors/400.html
-    ErrorDocument 401 /admin/errors/401.html
-    ErrorDocument 403 /admin/errors/403.html
-    ErrorDocument 404 /admin/errors/404.html
-    ErrorDocument 500 /admin/errors/500.html
-
-    # 7. URL yeniden yazma - Yönetici URL'sini gizleme
-    RewriteRule ^yonetici$ admin/ [L]
-
-    # 8. Hotlinking koruması
-    RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?elcivetklinigi\.com/.*$ [NC]
-    RewriteRule \.(jpg|jpeg|png|gif)$ - [F,NC]
-</IfModule>
-
-# 9. İçerik Güvenliği Politikası (CSP) Başlığı
-<IfModule mod_headers.c>
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:; font-src 'self' fonts.gstatic.com; frame-src 'none'; object-src 'none'"
-</IfModule>
-
-# 10. XSS koruması
-<IfModule mod_headers.c>
-    Header set X-XSS-Protection "1; mode=block"
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set Referrer-Policy "same-origin"
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
-</IfModule>
-
-# 11. PHP ayarları
-<IfModule mod_php5.c>
-    php_value session.cookie_httponly 1
-    php_value session.cookie_secure 1
-    php_value session.use_strict_mode 1
-    php_value session.cookie_samesite Strict
-</IfModule>
-
-# 12. Dosya yükleme limiti
-<IfModule mod_php5.c>
-    php_value upload_max_filesize 10M
-    php_value post_max_size 12M
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
 </IfModule>
