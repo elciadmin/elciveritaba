@@ -1,15 +1,49 @@
-name: SSS Auto-Update
+name: Update FAQ Content
+
 on:
-  push:
-    paths: ['sss.html']
+  repository_dispatch:
+    types: [content_update]
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit mesajı'
+        required: true
+        default: 'SSS güncellendi'
+
 jobs:
-  convert:
+  update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: pip install beautifulsoup4
-      - run: python html_json.py
-      - uses: actions/upload-artifact@v3
+      
+      - name: Validate JSON
+        id: validate
+        uses: actions/github-script@v6
         with:
-          name: sss-json
-          path: sss.json
+          script: |
+            try {
+              JSON.parse('${{ toJSON(github.event.client_payload) }}')
+              return true
+            } catch {
+              core.setFailed('Invalid JSON payload')
+            }
+      
+      - name: Update Content
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "${{ github.event.inputs.commit_message }}"
+          [ -f content/sss.json ] && jq '.updated = "$(date)"' content/sss.json > tmp.json && mv tmp.json content/sss.json
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "${{ github.event.inputs.commit_message }}"
+          git push
+          
+      - name: Notify Slack
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          slack-message: 'SSS güncellemesi başarısız oldu!'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
