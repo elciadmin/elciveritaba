@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:  # Manuel tetikleme için
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # gh-pages branch'ine yazmak için gerekli
+    
+    steps:
+      - uses: actions/checkout@v4
+        
+      # Eğer build gerekiyorsa (npm projesi gibi)
+      - name: Setup Node.js
+        if: false  # Build gerekmiyorsa bu satırı silin veya if: false yapın
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        if: false  # Build gerekmiyorsa bu satırı silin veya if: false yapın
+        run: npm install
+      
+      - name: Build
+        if: false  # Build gerekmiyorsa bu satırı silin veya if: false yapın
+        run: npm run build
+      
+      # GitHub Pages'e deploy
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # Tüm dosyaları deploy et
+          # publish_dir: ./dist  # Sadece build edilmiş dosyaları deploy et
+          keep_files: true  # Mevcut dosyaları koru
+          force_orphan: true  # Her seferinde temiz deploy
