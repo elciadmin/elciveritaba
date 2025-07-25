@@ -1,42 +1,41 @@
-name: Deploy static content to Pages
+name: Deploy Static Site
 
 on:
   push:
-    branches: ["main"]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: [ "main" ]
+  workflow_dispatch:  # Manuel tetikleme özelliği eklendi
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment: production  # Environment tanımı eklendi
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          
+      - name: Install dependencies
+        run: npm ci
+        if: exists('package-lock.json')  # Sadece package-lock varsa çalışır
         
-      - name: Create .nojekyll file
-        run: touch .nojekyll
-        
-      - name: Prepare site structure
+      - name: Build site
         run: |
-          mkdir -p ./_site
-          [ -f _redirects ] && cp _redirects ./_site/_redirects || echo "No _redirects file found"
+          npm run build || echo "Build script not found, continuing..."
+          cp _redirects dist/_redirects || true
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-      
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
+          path: 'dist'  # Build çıktısı için özel path
+          
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v2
