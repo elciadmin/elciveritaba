@@ -1,24 +1,42 @@
 name: Deploy static content to Pages
+
 on:
   push:
     branches: ["main"]
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: touch .nojekyll  # Bu satır kritik!
-      - run: cp _redirects ./_site/_redirects
-      - uses: actions/upload-pages-artifact@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Create .nojekyll file
+        run: touch .nojekyll
+        
+      - name: Prepare site structure
+        run: |
+          mkdir -p ./_site
+          [ -f _redirects ] && cp _redirects ./_site/_redirects || echo "No _redirects file found"
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+      
     runs-on: ubuntu-latest
     needs: build
+    
     steps:
-      - uses: actions/deploy-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v3
