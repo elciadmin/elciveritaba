@@ -3,182 +3,949 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elçi Veteriner | Yönetim Paneli</title>
+    <title>Dashboard - Elçi Veteriner Yönetim</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css" rel="stylesheet">
     <style>
-        /* Basit admin paneli stili */
         :root {
             --primary: #6a0ea1;
+            --primary-dark: #5a0d8f;
+            --primary-light: #f0e6ff;
             --secondary: #10b3d1;
+            --secondary-light: #e6f7fb;
             --light: #f8fafc;
             --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --warning: #f59e0b;
+            --warning-light: #fef3c7;
+            --info: #3b82f6;
+            --info-light: #dbeafe;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --sidebar-width: 280px;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
-            background: #f5f7fa;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
             color: var(--dark);
             line-height: 1.6;
+            display: flex;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-        
-        .admin-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .dashboard-container {
-            display: flex;
-            flex: 1;
-        }
-        
+
+        /* Sidebar */
         .sidebar {
-            width: 250px;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
         }
-        
+
+        .sidebar-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: auto;
+            margin-right: 12px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
         .sidebar-menu {
+            padding: 15px 0;
+            overflow-y: auto;
+            height: calc(100vh - 80px);
+        }
+
+        .sidebar-menu ul {
             list-style: none;
         }
-        
-        .sidebar-menu li {
-            margin-bottom: 10px;
-        }
-        
-        .sidebar-menu a {
-            display: block;
-            padding: 12px 15px;
-            border-radius: 8px;
-            background: #f0e6ff;
-            color: var(--primary);
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 14px 25px;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            position: relative;
+            font-size: 15px;
         }
-        
-        .sidebar-menu a:hover, .sidebar-menu a.active {
-            background: var(--primary);
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background: rgba(255, 255, 255, 0.1);
             color: white;
         }
-        
-        .sidebar-menu i {
-            margin-right: 10px;
-            width: 20px;
+
+        .sidebar-menu li a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
             text-align: center;
         }
-        
+
+        .sidebar-menu li a .badge {
+            margin-left: auto;
+            background: var(--secondary);
+            color: white;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        /* Main Content */
         .main-content {
             flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+            margin-right: 20px;
+            display: none;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 10px 15px 10px 40px;
+            border: 1px solid var(--light-gray);
+            border-radius: 30px;
+            width: 250px;
+            font-size: 14px;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-item {
+            position: relative;
+            margin-left: 20px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .navbar-item .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid var(--primary-light);
+        }
+
+        .user-profile span {
+            font-weight: 500;
+            color: var(--dark);
+            margin-right: 8px;
+        }
+
+        /* Content */
+        .content {
             padding: 30px;
         }
-        
-        .dashboard-cards {
+
+        .page-title {
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-title h2 i {
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+
+        .page-title p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-        
-        .dashboard-card {
+
+        .stat-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        
-        .dashboard-card i {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .admin-footer {
-            text-align: center;
             padding: 20px;
-            background: white;
-            border-top: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
         }
-        
-        @media (max-width: 768px) {
-            .dashboard-container {
-                flex-direction: column;
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .stat-info .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-info .change {
+            font-size: 12px;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+        }
+
+        .change.up {
+            color: var(--success);
+        }
+
+        .change.down {
+            color: var(--danger);
+        }
+
+        /* Charts Row */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .charts-row {
+                grid-template-columns: 1fr;
             }
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-header h3 {
+            color: var(--primary);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .card-header .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-header .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 8px;
+            background: var(--light);
+            color: var(--dark);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card-header .btn-sm:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Activity List */
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-content p {
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .activity-content p a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .activity-content p a:hover {
+            text-decoration: underline;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-time i {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        /* Recent Patients Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 12px 15px;
+            background: var(--light);
+            color: var(--dark);
+            font-weight: 600;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--light-gray);
+            vertical-align: middle;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover td {
+            background: var(--primary-light);
+        }
+
+        .patient-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .patient-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .patient-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .patient-type {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.completed {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .status-badge.pending {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .status-badge.cancelled {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
             .sidebar {
-                width: 100%;
+                margin-left: calc(-1 * var(--sidebar-width));
+            }
+            
+            .sidebar.active {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-box input {
+                width: 180px;
+            }
+            
+            .user-profile span {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-box input {
+                width: 150px;
+            }
+            
+            .navbar {
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px 15px;
             }
         }
     </style>
 </head>
 <body>
-    <header class="admin-header">
-        <h1><i class="fas fa-cogs"></i> Elçi Veteriner Yönetim Paneli</h1>
-    </header>
-    
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="../admin_panel.html"><i class="fas fa-home"></i> Ana Sayfa Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> İstatistik Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-hand-holding-medical"></i> Hizmet Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-comments"></i> Yorum Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Kullanıcı Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Ayarlar</a></li>
-                <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
-            </ul>
-        </aside>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../assets/img/logo-icon.png" alt="Elçi Veteriner">
+            <h3>Elçi Veteriner</h3>
+        </div>
         
-        <main class="main-content">
-            <h2>Yönetim Paneline Hoş Geldiniz</h2>
-            <p>Sol menüden istediğiniz bölüme erişebilir ve içerikleri düzenleyebilirsiniz.</p>
-            
-            <div class="dashboard-cards">
-                <div class="dashboard-card">
-                    <i class="fas fa-home"></i>
-                    <h3>Ana Sayfa Yönetimi</h3>
-                    <p>Ana sayfa içeriğini düzenleyin</p>
-                    <a href="../admin_panel.html" class="btn" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 5px; text-decoration: none;">Panele Git</a>
-                </div>
-                
-                <div class="dashboard-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>İstatistik Yönetimi</h3>
-                    <p>İstatistik verilerini güncelleyin</p>
-                </div>
-                
-                <div class="dashboard-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Randevu Yönetimi</h3>
-                    <p>Randevuları görüntüleyin ve yönetin</p>
-                </div>
-            </div>
-            
-            <div class="recent-activity">
-                <h3>Son Aktivite</h3>
-                <ul>
-                    <li>5 dakika önce - Ana sayfa başlığı güncellendi</li>
-                    <li>2 saat önce - 3 yeni yorum onaylandı</li>
-                    <li>1 gün önce - İstatistik verileri güncellendi</li>
-                </ul>
-            </div>
-        </main>
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="admin_panel.html"><i class="fas fa-file-alt"></i> Sayfa Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Randevular <span class="badge">5</span></a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Müşteriler</a></li>
+                <li><a href="#"><i class="fas fa-paw"></i> Hastalar</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> İstatistikler</a></li>
+                <li><a href="#"><i class="fas fa-comments"></i> Yorumlar</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Ayarlar</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Siteye Dön</a></li>
+            </ul>
+        </div>
     </div>
     
-    <footer class="admin-footer">
-        <p>© 2023 Elçi Veteriner Kliniği | Yönetim Paneli v1.0</p>
-    </footer>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Ara...">
+                </div>
+            </div>
+            
+            <div class="navbar-right">
+                <div class="navbar-item">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                
+                <div class="navbar-item">
+                    <i class="fas fa-envelope"></i>
+                    <span class="badge">7</span>
+                </div>
+                
+                <div class="user-profile">
+                    <img src="../assets/img/user-avatar.jpg" alt="Admin">
+                    <span>Admin</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="page-title">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <p>Klinik yönetim paneline hoş geldiniz. Son istatistikler ve aktiviteler aşağıda listelenmiştir.</p>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark));">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Bugünkü Randevular</h3>
+                        <div class="value">18</div>
+                        <div class="change up">
+                            <i class="fas fa-arrow-up"></i> 12% geçen haftaya göre
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--secondary), #0e9cb8);">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Toplam Hasta</h3>
+                        <div class="value">1,245</div>
+                        <div class="change up">
+                            <i class="fas fa-arrow-up"></i> 5% geçen aya göre
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #0d9d6e);">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Bu Ayki Randevular</h3>
+                        <div class="value">328</div>
+                        <div class="change up">
+                            <i class="fas fa-arrow-up"></i> 8% geçen aya göre
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #d97706);">
+                        <i class="fas fa-comment-dollar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Aylık Gelir</h3>
+                        <div class="value">₺42,500</div>
+                        <div class="change down">
+                            <i class="fas fa-arrow-down"></i> 3% geçen aya göre
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Randevu İstatistikleri</h3>
+                        <div class="card-actions">
+                            <button class="btn-sm">Günlük</button>
+                            <button class="btn-sm">Haftalık</button>
+                            <button class="btn-sm">Aylık</button>
+                        </div>
+                    </div>
+                    <canvas id="appointmentsChart" height="300"></canvas>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie"></i> Hasta Dağılımı</h3>
+                    </div>
+                    <canvas id="patientsChart" height="300"></canvas>
+                </div>
+            </div>
+            
+            <!-- Recent Activity & Recent Patients -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bell"></i> Son Aktivite</h3>
+                            <a href="#" class="btn-sm">Tümünü Gör</a>
+                        </div>
+                        
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><a href="#">Mehmet Yılmaz</a> yeni randevu oluşturdu - <strong>Karabaş (Köpek)</strong></p>
+                                    <span class="activity-time"><i class="far fa-clock"></i> 10 dakika önce</span>
+                                </div>
+                            </li>
+                            
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><a href="#">Ana sayfa</a> güncellendi - <strong>Yeni hizmetler eklendi</strong></p>
+                                    <span class="activity-time"><i class="far fa-clock"></i> 1 saat önce</span>
+                                </div>
+                            </li>
+                            
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p><a href="#">Ayşe Kaya</a> yeni yorum bıraktı - <strong>5 yıldız</strong></p>
+                                    <span class="activity-time"><i class="far fa-clock"></i> 2 saat önce</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-clock"></i> Yaklaşan Randevular</h3>
+                            <a href="#" class="btn-sm">Tümünü Gör</a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Hasta</th>
+                                        <th>Tür</th>
+                                        <th>Saat</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <img src="../assets/img/pets/pet1.jpg" alt="Karabaş">
+                                                <div>
+                                                    <div class="patient-name">Karabaş</div>
+                                                    <div class="patient-type">Mehmet Yılmaz</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Köpek</td>
+                                        <td>14:30</td>
+                                        <td><span class="status-badge pending">Bekliyor</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <img src="../assets/img/pets/pet2.jpg" alt="Pamuk">
+                                                <div>
+                                                    <div class="patient-name">Pamuk</div>
+                                                    <div class="patient-type">Ayşe Kaya</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Kedi</td>
+                                        <td>15:45</td>
+                                        <td><span class="status-badge pending">Bekliyor</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="patient-info">
+                                                <img src="../assets/img/pets/pet3.jpg" alt="Maviş">
+                                                <div>
+                                                    <div class="patient-name">Maviş</div>
+                                                    <div class="patient-type">Zeynep Demir</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Kuş</td>
+                                        <td>16:30</td>
+                                        <td><span class="status-badge completed">Tamamlandı</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        // Sidebar toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Appointments Chart
+            const appointmentsCtx = document.getElementById('appointmentsChart').getContext('2d');
+            const appointmentsChart = new Chart(appointmentsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+                    datasets: [{
+                        label: 'Randevu Sayısı',
+                        data: [120, 150, 180, 210, 240, 280, 310, 290, 260, 230, 200, 170],
+                        backgroundColor: 'rgba(106, 14, 161, 0.1)',
+                        borderColor: '#6a0ea1',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Patients Chart
+            const patientsCtx = document.getElementById('patientsChart').getContext('2d');
+            const patientsChart = new Chart(patientsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Köpek', 'Kedi', 'Kuş', 'Diğer'],
+                    datasets: [{
+                        data: [45, 35, 12, 8],
+                        backgroundColor: [
+                            '#6a0ea1',
+                            '#10b3d1',
+                            '#10b981',
+                            '#f59e0b'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Animate stats counters
+            const counters = document.querySelectorAll('.stat-info .value');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.innerText.replace(/[^0-9]/g, '');
+                const count = +counter.innerText.replace(/[^0-9]/g, '');
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = '0';
+                    
+                    const updateCount = () => {
+                        const current = +counter.innerText.replace(/[^0-9]/g, '');
+                        const increment = target / speed;
+                        
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current + increment).toLocaleString();
+                            setTimeout(updateCount, 1);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    
+                    updateCount();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
