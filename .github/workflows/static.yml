@@ -3,12 +3,12 @@ name: Deploy Static Site
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:  # Manuel tetikleme özelliği eklendi
+  workflow_dispatch:  # Manuel tetikleme özelliği
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production  # Environment tanımı eklendi
+    environment: production
     steps:
       - uses: actions/checkout@v4
       
@@ -25,7 +25,7 @@ jobs:
           
       - name: Install dependencies
         run: npm ci
-        if: exists('package-lock.json')  # Sadece package-lock varsa çalışır
+        if: exists('package-lock.json')
         
       - name: Build site
         run: |
@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: 'dist'  # Build çıktısı için özel path
+          path: 'dist'
           
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
