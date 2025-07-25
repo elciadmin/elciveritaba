@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elçi Veteriner - Yönetim Paneli</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Elçi Veteriner - Yönetim Paneli Giriş</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Renk Değişkenleri */
         :root {
             --primary: #6a0ea1;
             --secondary: #10b3d1;
-            --accent: #ff7e5f;
+            --danger: #ef4444;
             --light: #f8fafc;
             --dark: #1e293b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-            --glass-bg: rgba(255, 255, 255, 0.85);
         }
         
         * {
@@ -32,7 +27,6 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #6a0ea1, #10b3d1);
             color: white;
-            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -52,7 +46,7 @@
         .login-left {
             flex: 1;
             background: linear-gradient(rgba(106, 14, 161, 0.85), rgba(106, 14, 161, 0.85)), 
-                        url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+                        url('https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             padding: 60px;
@@ -60,7 +54,6 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            text-align: center;
         }
         
         .login-left::before {
@@ -82,37 +75,25 @@
             font-size: 42px;
             margin-bottom: 20px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .mission-statement {
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 40px;
+            font-size: 18px;
             line-height: 1.6;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 10px;
             backdrop-filter: blur(5px);
-            border-left: 4px solid var(--secondary);
-            position: relative;
-        }
-        
-        .mission-statement::before {
-            content: """;
-            position: absolute;
-            top: -30px;
-            left: 20px;
-            font-size: 100px;
-            font-family: Georgia, serif;
-            color: rgba(255, 255, 255, 0.2);
+            border-left: 3px solid var(--secondary);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
         }
         
         .login-right {
             width: 40%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -120,21 +101,13 @@
         
         .login-logo {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         
         .login-logo h2 {
             color: var(--primary);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .login-logo span {
-            color: var(--secondary);
-            font-size: 16px;
-            font-weight: 500;
-            display: block;
         }
         
         .login-form {
@@ -142,7 +115,7 @@
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
@@ -162,17 +135,24 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
-            font-size: 18px;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            cursor: pointer;
         }
         
         .form-control {
             width: 100%;
-            padding: 15px 15px 15px 50px;
+            padding: 12px 15px 12px 45px;
             border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 15px;
             transition: var(--transition);
-            background: rgba(255, 255, 255, 0.7);
         }
         
         .form-control:focus {
@@ -185,31 +165,17 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 16px;
             cursor: pointer;
             transition: var(--transition);
             margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-login::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn-login:hover::after {
-            left: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .btn-login:hover {
@@ -217,90 +183,47 @@
             box-shadow: 0 8px 20px rgba(106, 14, 161, 0.4);
         }
         
-        .forgot-password {
-            text-align: right;
-            margin-top: 10px;
-        }
-        
-        .forgot-password a {
-            color: var(--secondary);
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .forgot-password a:hover {
-            color: var(--primary);
-        }
-        
         .security-warning {
             background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid var(--danger);
-            padding: 15px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 30px;
+            border-left: 3px solid var(--danger);
+            padding: 12px;
+            border-radius: 0 5px 5px 0;
+            margin-top: 25px;
             display: flex;
             align-items: center;
-        }
-        
-        .security-warning i {
-            color: var(--danger);
-            font-size: 24px;
-            margin-right: 15px;
-        }
-        
-        .security-warning p {
+            gap: 10px;
+            font-size: 13px;
             color: var(--dark);
-            font-size: 14px;
-            font-weight: 500;
         }
         
         .login-footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
+            font-size: 13px;
             color: var(--dark);
-            font-size: 14px;
         }
         
         .login-footer a {
             color: var(--secondary);
             font-weight: 500;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            transition: var(--transition);
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.2);
         }
         
-        .login-footer a:hover {
-            color: white;
-            background: var(--primary);
-            transform: translateX(-5px);
-        }
-        
-        /* Animasyonlar */
         @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .animated {
-            animation: fadeInUp 0.8s ease-out forwards;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
         }
         
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
+        .shake {
+            animation: shake 0.5s;
+        }
         
-        /* Responsive Tasarım */
         @media (max-width: 992px) {
             .login-container {
                 flex-direction: column;
@@ -311,7 +234,7 @@
             }
             
             .login-left {
-                padding: 40px 30px;
+                padding: 40px;
             }
         }
         
@@ -320,24 +243,27 @@
                 font-size: 32px;
             }
             
-            .mission-statement {
-                font-size: 20px;
-                padding: 20px;
-            }
-            
             .login-right {
-                padding: 40px 20px;
+                padding: 30px;
             }
         }
         
-        @media (max-width: 576px) {
-            .login-left h1 {
-                font-size: 28px;
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 0;
+            }
+            
+            .login-left {
+                padding: 30px 20px;
+                display: none;
             }
             
             .mission-statement {
-                font-size: 18px;
-                padding: 15px;
+                display: none;
+            }
+            
+            .btn-login {
+                padding: 16px;
             }
         }
     </style>
@@ -346,27 +272,27 @@
     <div class="login-container">
         <div class="login-left">
             <div class="login-left-content">
-                <h1 class="animated">Elçi Veteriner Kliniği</h1>
-                <p class="animated delay-1">Yönetim Konsolu</p>
-                
-                <div class="mission-statement animated delay-2">
-                    Hayvan sağlığında süreklilik ve mükemmellik ilkeleriyle, ihtiyaç sahibi tüm can dostlarımıza en iyi hizmeti sunabilmek için tasarlanmış özel yetkili personel erişim sistemidir.
+                <h1>Elçi Veteriner Kliniği</h1>
+                <div class="mission-statement">
+                    Hayvan sağlığında profesyonel çözümler sunmak için tasarlanmış özel yetkili personel erişim sistemidir.
                 </div>
             </div>
         </div>
         
         <div class="login-right">
             <div class="login-logo">
-                <h2>Yönetim Konsolu</h2>
-                <span>Özel Yetkili Personel Erişimi</span>
+                <h2>Yönetim Paneli Giriş</h2>
             </div>
             
             <form class="login-form" id="loginForm">
+                <input type="hidden" name="csrf_token" id="csrf_token">
+                
                 <div class="form-group">
                     <label for="username">Yönetici Kodu</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user-shield"></i>
-                        <input type="text" id="username" name="kullanici" class="form-control" placeholder="Yönetici kodunuzu girin" required>
+                        <input type="text" id="username" name="username" class="form-control" 
+                               placeholder="elciadmin" required autocomplete="username">
                     </div>
                 </div>
                 
@@ -374,67 +300,118 @@
                     <label for="password">Güvenlik Şifresi</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="sifre" class="form-control" placeholder="Şifrenizi girin" required>
+                        <input type="password" id="password" name="password" class="form-control" 
+                               placeholder="••••••••" required autocomplete="current-password">
+                        <i class="fas fa-eye toggle-password"></i>
                     </div>
                 </div>
                 
-                <div class="forgot-password">
-                    <a href="#">Şifremi Unuttum?</a>
-                </div>
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                </button>
                 
-                <button type="submit" class="btn-login">Sisteme Giriş Yap</button>
+                <div class="security-warning">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>Yetkisiz erişim girişimleri yasal işleme tabidir.</p>
+                </div>
             </form>
             
-            <div class="security-warning">
-                <i class="fas fa-shield-alt"></i>
-                <p>⚠️ Bu konsola erişim sadece yetkili personel ile sınırlıdır. Yetkisiz erişim girişimleri yasal işleme tabidir.</p>
-            </div>
-            
             <div class="login-footer">
-                <a href="../index.html"><i class="fas fa-arrow-left"></i> Site Ana Sayfasına Dön</a>
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Animasyonları tetikleme
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.animated');
-            elements.forEach((el, index) => {
-                el.style.animationDelay = `${index * 0.2}s`;
-            });
+        // CSRF Token oluşturma
+        document.getElementById('csrf_token').value = Math.random().toString(36).substring(2) + 
+                                                     Math.random().toString(36).substring(2);
+        
+        // Şifre göster/gizle
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+            if(passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+        
+        // Giriş denemelerini takip
+        let loginAttempts = parseInt(localStorage.getItem('loginAttempts')) || 0;
+        const MAX_ATTEMPTS = 3;
+        const BLOCK_TIME = 15 * 60 * 1000; // 15 dakika
+        
+        // Form gönderimi
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Form gönderimi
-            const loginForm = document.getElementById('loginForm');
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Bloke kontrolü
+            const lastAttempt = parseInt(localStorage.getItem('lastAttemptTime'));
+            if(loginAttempts >= MAX_ATTEMPTS && Date.now() - lastAttempt < BLOCK_TIME) {
+                alert(`Çok fazla hatalı giriş. Lütfen ${Math.ceil((BLOCK_TIME - (Date.now() - lastAttempt))/60000)} dakika sonra tekrar deneyin.`);
+                return;
+            }
+            
+            // Yükleme animasyonu
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Giriş Yapılıyor';
+            loginBtn.disabled = true;
+            
+            // Simüle edilmiş gecikme (gerçek uygulamada fetch kullanın)
+            setTimeout(() => {
+                // Sabit giriş bilgileri (gerçek uygulamada sunucu tarafında kontrol edin)
+                const validCredentials = username === 'elciadmin' && password === 'elciadmin';
                 
-                // Sabit giriş bilgileri
-                const correctUsername = "elciadmin";
-                const correctPassword = "elciadmin";
-                
-                // Kullanıcının girdiği değerler
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                // Kontrol et
-                if(username === correctUsername && password === correctPassword) {
-                    // Giriş başarılı - panele yönlendir
-                    sessionStorage.setItem('adminLoggedIn', 'true');
+                if(validCredentials) {
+                    // Başarılı giriş
+                    localStorage.removeItem('loginAttempts');
+                    localStorage.removeItem('lastAttemptTime');
+                    
+                    // Oturum token oluştur
+                    sessionStorage.setItem('adminAuth', btoa(Date.now() + '|' + navigator.userAgent));
+                    
+                    // Yönlendirme
                     window.location.href = "dashboard.html";
                 } else {
-                    // Hatalı giriş animasyonu
-                    const inputs = document.querySelectorAll('.form-control');
-                    inputs.forEach(input => {
-                        input.style.borderColor = 'var(--danger)';
-                        setTimeout(() => {
-                            input.style.borderColor = '#e0e0e0';
-                        }, 1000);
+                    // Hatalı giriş
+                    loginAttempts++;
+                    localStorage.setItem('loginAttempts', loginAttempts);
+                    localStorage.setItem('lastAttemptTime', Date.now());
+                    
+                    // Animasyon
+                    document.querySelectorAll('.form-control').forEach(input => {
+                        input.classList.add('shake');
+                        setTimeout(() => input.classList.remove('shake'), 500);
                     });
                     
-                    alert('Hatalı kullanıcı adı veya şifre! Doğru bilgiler: elciadmin / elciadmin');
+                    // Butonu resetle
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Giriş Yap';
+                    loginBtn.disabled = false;
+                    
+                    if(loginAttempts >= MAX_ATTEMPTS) {
+                        alert(`Çok fazla hatalı giriş. Lütfen 15 dakika sonra tekrar deneyin.`);
+                    } else {
+                        alert(`Hatalı giriş! Kalan deneme hakkınız: ${MAX_ATTEMPTS - loginAttempts}`);
+                    }
                 }
-            });
+            }, 1000);
+        });
+        
+        // Sayfa yüklendiğinde bloke durumunu kontrol et
+        window.addEventListener('load', () => {
+            const lastAttempt = parseInt(localStorage.getItem('lastAttemptTime'));
+            if(loginAttempts >= MAX_ATTEMPTS && Date.now() - lastAttempt < BLOCK_TIME) {
+                const minutesLeft = Math.ceil((BLOCK_TIME - (Date.now() - lastAttempt))/60000);
+                alert(`Sistem geçici olarak bloke edildi. Lütfen ${minutesLeft} dakika sonra tekrar deneyin.`);
+                document.querySelectorAll('input, button').forEach(el => el.disabled = true);
+            }
         });
     </script>
 </body>
