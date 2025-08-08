@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elçi Veteriner Kliniği | Hakkımızda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a0ea1; /* Mor */
+            --secondary-color: #10b3d1; /* Mavi */
+            --accent-color: #f39c12; /* Turuncu */
+            --light-color: #f8f9fa; /* Açık Gri */
+            --dark-color: #343a40; /* Koyu Gri */
+            --white: #ffffff; /* Beyaz */
+            --gray: #6c757d; /* Gri */
+            --emergency-red: #e74c3c; /* Acil Durum Kırmızısı */
+            --success-green: #2ecc71; /* Başarı Yeşili */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Animasyonlar */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .page-header h1 {
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 5px 0;
+            font-size: 14px;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-contact {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-contact i {
+            margin-right: 5px;
+        }
+        
+        .header-contact a {
+            color: var(--white);
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        .header-contact a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+        
+        .logo-text span {
+            color: var(--secondary-color);
+            font-size: 14px;
+            display: block;
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* Dropdown Menü Stilleri */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 250px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            z-index: 1;
+            padding: 10px 0;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dropdown > a::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 8px;
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover > a::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(106, 14, 161, 0.85), rgba(106, 14, 161, 0.85)), url('https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-header h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .page-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 20px auto 0;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            font-size: 14px;
+            background-color: #f0f7ff;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb a {
+            color: var(--gray);
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb span {
+            margin: 0 5px;
+            color: var(--gray);
+        }
+        
+        /* About Sections */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 30px auto 0;
+            color: var(--gray);
+        }
+        
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .about-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-features {
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover .feature-icon {
+            background-color: var(--primary-color);
+            transform: rotate(15deg);
+        }
+        
+        /* Team Section */
+        .team-section {
+            background-color: #f0f7ff;
+            padding: 80px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .member-photo {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        .member-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .member-title {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #e6f2ff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary-color);
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: #e6f2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover .value-icon {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--secondary-color);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 50%;
+            padding-right: 30px;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 30px;
+            padding-right: 0;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: auto;
+            left: -10px;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 15px;
+            right: -75px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-year {
+            right: auto;
+            left: -75px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a3a52, var(--primary-color));
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Acil Arama Butonu */
+        .emergency-call {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .emergency-call:hover {
+            transform: scale(1.1);
+        }
+        
+        .emergency-call::after {
+            content: 'Ara: 0332 322 32 20';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .emergency-call:hover::after {
+            opacity: 1;
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 190px;
+            right: 30px;
+            width: 350px;
+            max-height: 500px;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-widget.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .chat-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            max-height: 300px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message-content {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .received {
+            align-self: flex-start;
+            background-color: #e5e5ea;
+            color: #000;
+        }
+        
+        .sent {
+            align-self: flex-end;
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .ai-response {
+            font-style: italic;
+            color: #666;
+        }
+        
+        .transfer-chat {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .transfer-chat:hover {
+            background-color: #5a0c8b;
+        }
+        
+        .chat-input-area {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+        }
+        
+        #chatInput {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            margin-right: 10px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .send-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            background-color: #0e9bb8;
+        }
+        
+        /* Chat Toggle Button */
+        .chat-toggle {
+            position: fixed;
+            bottom: 190px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 5px 20px rgba(58, 155, 220, 0.4);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-chat 2s infinite;
+        }
+        
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-toggle::after {
+            content: 'Canlı Destek';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .chat-toggle:hover::after {
+            opacity: 1;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+        
+        @keyframes pulse-chat {
+            0% { box-shadow: 0 0 0 0 rgba(58, 155, 220, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(58, 155, 220, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(58, 155, 220, 0); }
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 270px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 999;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                padding: 10px 20px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            /* Mobil için dropdown ayarları */
+            .dropdown > a::after {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                padding-left: 20px;
+                opacity: 1;
+                transform: none;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown.active > a::after {
+                transform: rotate(180deg) translateY(50%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-contact {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-contact a {
+                margin: 5px 0 0;
+            }
+            
+            .page-header {
+                padding: 140px 0 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 18px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                left: 0;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-year,
+            .timeline-year {
+                left: 5px;
+                right: auto;
+            }
+            
+            .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: 55px;
+                right: auto;
+            }
+            
+            .emergency-call {
+                bottom: 100px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+            
+            .chat-toggle {
+                bottom: 170px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+            
+            .chat-widget {
+                width: 90%;
+                right: 5%;
+                bottom: 80px;
+            }
+            
+            .back-to-top {
+                bottom: 240px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Yeni Eklenen Stiller */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            color: var(--gray);
+        }
+        
+        .mission-vision {
+            background-color: #f0f7ff;
+            padding: 80px 0;
+        }
+        
+        .mission-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mission-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .mission-card i {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(106, 14, 161, 0.05), rgba(106, 14, 161, 0.05));
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--secondary-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            padding-top: 30px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .author-info span {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .appointment-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .appointment-cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .appointment-cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        /* Animasyonlar için ek */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Düzeltme: Dropdown stilleri */
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f0f7ff;
+            color: var(--primary-color);
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-contact">
+                    <span><i class="fas fa-map-marker-alt"></i> Havzan Mah. Yeni Meram Cad. 17/1 Meram/Konya</span>
+                </div>
+                <div class="header-contact">
+                    <a href="tel:03323223220"><i class="fas fa-phone-alt"></i> 0332 322 32 20</a>
+                    <a><i class="fas fa-envelope"></i> elcivetklinig@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-text">
+                        <h1>Elçi Veteriner</h1>
+                        <span>Hayvan Sağlığında Mükemmellik</span>
+                    </div>
+                </div>
+                <nav>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul id="mainMenu">
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        
+                        <li class="dropdown">
+                            <a href="hakkimizda.html" class="active">Hakkımızda</a>
+                            <div class="dropdown-content">
+                                <a href="#elci-kimdir">Elçi Kimdir?</a>
+                                <a href="#ekibimiz">Ekibimiz</a>
+                                <a href="#klinik">Kliniğimiz</a>
+                                <a href="#misyon-vizyon">Misyon & Vizyon</a>
+                                <a href="#degerler">Değerlerimiz</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="hizmetlerimiz.html">Hizmetlerimiz</a>
+                            <div class="dropdown-content">
+                                <a href="#">Acil Veteriner Hizmetleri</a>
+                                <a href="#">Koruyucu Hekimlik</a>
+                                <a href="#">Cerrahi Operasyonlar</a>
+                                <a href="#">Ağız ve Diş Sağlığı</a>
+                                <a href="#">İç Hastalıkları</a>
+                                <a href="#">Doğum ve Jinekoloji</a>
+                                <a href="#">Fizik Tedavi ve Rehabilitasyon Hizmetleri</a>
+                                <a href="#">Konaklama Hizmetleri</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="blog.html">Blog</a>
+                            <div class="dropdown-content">
+                                <a href="#">Evcil Hayvan Rehberleri</a>
+                                <a href="#">Sağlık & Tedavi Rehberi</a>
+                                <a href="#">Kliniğimizden Haberler</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="sss.html">SSS</a>
+                            <div class="dropdown-content">
+                                <a href="#">Fiyat & Ödeme Programlarımız</a>
+                                <a href="#">Hizmet Süreçleri</a>
+                                <a href="#">Acil Durumlar</a>
+                            </div>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="hasta_iliskileri.html">Hasta İlişkileri</a>
+                            <div class="dropdown-content">
+                                <a href="hasta_iliskileri.html#online-randevu">Online Randevu</a>
+                                <a href="hasta_iliskileri.html#memnuniyet-anketi">Memnuniyet Anketi</a>
+                                <a href="hasta_iliskileri.html#basari-hikayeleri">Başarı Hikayeleri</a>
+                                <a href="hasta_iliskileri.html#sikayet-oneri">Şikayet & Öneri</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Hakkımızda</h1>
+            <p>Konya Elçi Veteriner Kliniği - Hayvan Sağlığında Mükemmellik</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Ana Sayfa</a> <span>&gt;</span> <span>Hakkımızda</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="elci-kimdir">
+        <div class="container">
+            <div class="section-title">
+                <h2>Elçi Kimdir?</h2>
+                <p>Kurucumuz Veteriner Hekim Mehmet Elçi'nin hikayesi</p>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1583339793403-3b0338094d19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Veteriner Hekim Mehmet Elçi - Konya Elçi Veteriner Kliniği Kurucusu" loading="lazy">
+                </div>
+                <div class="about-content">
+                    <h3>Hayvan Sevgisiyle Başlayan Bir Yolculuk</h3>
+                    <p>Mehmet Elçi, 1980 Konya doğumlu olup, Ankara Üniversitesi Veteriner Fakültesi'nden 2003 yılında mezun oldu. Çocukluğundan beri hayvanlara olan sevgisi ve ilgisi onu bu mesleğe yönlendirdi.</p>
+                    <p>Mezun olduktan sonra 10 yıl boyunca Konya ve çevresindeki çiftliklerde büyükbaş hayvanlar üzerine çalıştı. Bu süreçte edindiği tecrübeler, onun evcil hayvan sağlığına yönelmesinde önemli rol oynadı.</p>
+                    <p>2013 yılında, Konya Meram'da Elçi Veteriner Kliniği'ni kurarak, evcil hayvan sağlığına adanmış bir merkez oluşturdu. Bugün, kliniğimiz Konya'nın en güvenilir veteriner kliniklerinden biri olarak hizmet vermektedir.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h4>Eğitim</h4>
+                                <p>Ankara Üniversitesi Veteriner Fakültesi (1998-2003)</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h4>Uzmanlık</h4>
+                                <p>Evcil Hayvan Cerrahisi ve İç Hastalıkları</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <div>
+                                <h4>Misyon</h4>
+                                <p>Hayvan sağlığında kaliteli ve erişilebilir hizmet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kliniğimizin Başarıları</h2>
+                <p>Yıllara yayılan tecrübemiz ve başarılarımız</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Mutlu Hasta</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Uzman Ekip</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">Memnuniyet (%)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">Yıllık Tecrübe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="ekibimiz">
+        <div class="container">
+            <div class="section-title">
+                <h2>Uzman Ekibimiz</h2>
+                <p>Konya'nın en deneyimli veteriner hekimleri</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Veteriner Hekim Dr. Ayşe Yılmaz - Konya Elçi Veteriner Kliniği" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Ayşe Yılmaz</h3>
+                        <span class="member-title">Cerrahi Uzmanı</span>
+                        <p>İstanbul Üniversitesi Veteriner Fakültesi mezunu olan Dr. Ayşe, 12 yıllık deneyimiyle kliniğimizin cerrahi operasyonlar bölümünü yönetmektedir.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Veteriner Hekim Dr. Mehmet Kaya - Konya Elçi Veteriner Kliniği" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Mehmet Kaya</h3>
+                        <span class="member-title">İç Hastalıkları Uzmanı</span>
+                        <p>Ankara Üniversitesi'nden mezun olan Dr. Mehmet, 8 yıllık tecrübesiyle iç hastalıkları ve tanı bölümümüzün sorumlusudur.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Veteriner Hekim Dr. Zeynep Demir - Konya Elçi Veteriner Kliniği" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Zeynep Demir</h3>
+                        <span class="member-title">Dermatoloji ve Diş Sağlığı Uzmanı</span>
+                        <p>10 yıllık deneyime sahip Dr. Zeynep, hayvanlarda deri hastalıkları ve diş sağlığı konusunda uzmanlaşmıştır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinic Section -->
+    <section class="about-section" id="klinik">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kliniğimiz</h2>
+                <p>Modern teknoloji ile donatılmış Konya'nın en iyi veteriner kliniği</p>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-content">
+                    <h3>Konya'da Bir Sağlık Merkezi</h3>
+                    <p>2013 yılında Konya Meram'da kurulan kliniğimiz, 300m² alanda hizmet vermektedir. Modern mimarisi ve hayvan dostu tasarımıyla Konya'nın en donanımlı veteriner kliniklerinden biridir.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clinic-medical"></i>
+                            </div>
+                            <div>
+                                <h4>Modern Ekipmanlar</h4>
+                                <p>Dijital röntgen, ultrason, laboratuvar ve ameliyathane</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-procedures"></i>
+                            </div>
+                            <div>
+                                <h4>Ameliyathane</h4>
+                                <p>Tam donanımlı ve steril ameliyathane ortamı</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-umbrella-beach"></i>
+                            </div>
+                            <div>
+                                <h4>Konaklama</h4>
+                                <p>Evcil dostlarınız için konforlu konaklama imkanı</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div>
+                                <h4>Otopark</h4>
+                                <p>Müşterilerimiz için ücretsiz otopark imkanı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1583339793403-3b0338094d19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Konya Elçi Veteriner Kliniği - Modern Tesislerimiz" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision" id="misyon-vizyon">
+        <div class="container">
+            <div class="section-title">
+                <h2>Misyon & Vizyon</h2>
+                <p>Geleceğe dair hedeflerimiz ve ilkelerimiz</p>
+            </div>
+            
+            <div class="mission-container">
+                <div class="mission-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Misyonumuz</h3>
+                    <p>Hayvan sağlığını ve refahını en üst düzeyde koruyarak, evcil hayvanların ve sahiplerinin yaşam kalitesini artırmak. Bunu bilimsel yöntemler, şefkatli yaklaşım ve etik değerler çerçevesinde gerçekleştirmek.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Vizyonumuz</h3>
+                    <p>Türkiye'nin öncü veteriner kliniği olarak, hayvan sağlığı alanında yenilikçi uygulamalar geliştirmek ve uluslararası standartlarda hizmet sunmak. Toplumsal farkındalık yaratarak hayvan haklarına saygılı bir toplum oluşumuna katkıda bulunmak.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section" id="degerler">
+        <div class="container">
+            <div class="section-title">
+                <h2>Değerlerimiz</h2>
+                <p>Konya Elçi Veteriner Kliniği'nin temel prensipleri</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Hayvan Sevgisi</h3>
+                    <p>Tüm çalışmalarımızın merkezinde hayvan sevgisi ve saygısı yer alır. Her canlıya sevgi ve şefkatle yaklaşıyoruz.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hand-holding-medical"></i>
+                    </div>
+                    <h3>Profesyonellik</h3>
+                    <p>Alanında uzman veteriner hekimlerimizle en güncel tıbbi bilgileri kullanarak profesyonel hizmet sunuyoruz.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Güvenilirlik</h3>
+                    <p>Hayvan sahiplerinin bize duyduğu güven en değerli varlığımızdır. Bu güveni her zaman hak etmek için çalışıyoruz.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Yenilikçilik</h3>
+                    <p>Veterinerlik alanındaki teknolojik gelişmeleri yakından takip ediyor, kliniğimizi sürekli yeniliyoruz.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Toplumsal Sorumluluk</h3>
+                    <p>Sokak hayvanlarına ücretsiz tedavi, sahiplendirme etkinlikleri ve eğitim programlarıyla topluma katkı sağlıyoruz.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Şeffaflık</h3>
+                    <p>Tüm işlemlerde şeffaf bir iletişim politikası izliyor, hayvan sahiplerini süreçler hakkında bilgilendiriyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Müşteri Görüşleri</h2>
+                <p>Hasta sahiplerinin kliniğimiz hakkındaki düşünceleri</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Köpeğimizin ameliyatı için Elçi Veteriner Kliniği'ni tercih ettik. Hem doktorların uzmanlığı hem de personelin ilgisi gerçekten takdire şayandı. Köpeğimiz çok hızlı iyileşti."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Müşteri Görüşü">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ayşe Kaya</h4>
+                            <span>Kedi Sahibi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Kedimizin diş problemi vardı, birçok klinik çözüm bulamadı. Elçi Veteriner'de Dr. Zeynep Hanım sayesinde kedimiz sağlığına kavuştu. Herkese tavsiye ediyorum."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Müşteri Görüşü">
+                        </div>
+                        <div class="author-info">
+                            <h4>Mehmet Yılmaz</h4>
+                            <span>Köpek Sahibi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Gece yarısı kedim acil müdahale gerektiriyordu. 7/24 hizmet veren Elçi Veteriner bize hemen yardımcı oldu. Profesyonel yaklaşımları için çok teşekkür ederiz."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Müşteri Görüşü">
+                        </div>
+                        <div class="author-info">
+                            <h4>Zeynep Demir</h4>
+                            <span>Kuş Sahibi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tarihçemiz</h2>
+                <p>Konya Elçi Veteriner Kliniği'nin gelişim yolculuğu</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Kuruluş</h3>
+                        <p>Mehmet Elçi, Konya Meram'da küçük bir veteriner kliniği açtı. Başlangıçta tek veteriner hekim ve bir asistanla hizmet vermeye başladı.</p>
+                    </div>
+                    <div class="timeline-year">2013</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>İlk Genişleme</h3>
+                        <p>Kliniğin büyümesiyle birlikte yeni ekipmanlar alındı ve ikinci veteriner hekim kadroya katıldı. Hizmet yelpazesi genişletildi.</p>
+                    </div>
+                    <div class="timeline-year">2015</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Yeni Bina</h3>
+                        <p>Artmış hasta kapasitesi nedeniyle şu anki modern binaya taşınıldı. 300m² alanda hizmet vermeye başladık.</p>
+                    </div>
+                    <div class="timeline-year">2017</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Teknolojik Altyapı</h3>
+                        <p>Dijital röntgen, ultrason ve modern laboratuvar ekipmanlarıyla kliniğimiz Konya'nın en donanımlı veteriner merkezlerinden biri haline geldi.</p>
+                    </div>
+                    <div class="timeline-year">2019</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>7/24 Acil Servis</h3>
+                        <p>Konya'da ilk kez 7/24 kesintisiz acil veteriner hizmeti sunmaya başladık. Gece nöbet sistemi uygulamasını hayata geçirdik.</p>
+                    </div>
+                    <div class="timeline-year">2021</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Konya'nın Öncü Kliniği</h3>
+                        <p>Bugün, 5 uzman veteriner hekim ve 10 destek personeli ile Konya'nın en çok tercih edilen veteriner kliniği olarak hizmet vermeye devam ediyoruz.</p>
+                    </div>
+                    <div class="timeline-year">2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment CTA -->
+    <section class="appointment-cta">
+        <div class="container">
+            <h2>Evcil Dostunuz İçin Profesyonel Yardım</h2>
+            <p>Elçi Veteriner Kliniği olarak, hayvanınızın sağlığı için en iyi hizmeti sunmaya hazırız. Randevu alarak uzman ekibimizle tanışın.</p>
+            <button class="btn">Hemen Randevu Al</button>
+            <button class="btn btn-outline">Bizi Arayın</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3>Elçi Veteriner Kliniği</h3>
+                <p>Konya'nın Meram ilçesinde, hayvan sağlığı alanında uzman ekibimizle hizmet veriyoruz. 7/24 acil veteriner hizmeti.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/elciveteriner" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/elciveteriner" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/elciveteriner" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/@El%C3%A7iveterinerklini%C4%9Fi" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Hızlı Linkler</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                    <li><a href="hizmetlerimiz.html">Hizmetlerimiz</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="hasta-iliskileri.html">Hasta İlişkileri</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Konya Veteriner Hizmetlerimiz</h3>
+                <ul class="footer-links">
+                    <li><a href="hizmetlerimiz.html">Konya Acil Veteriner</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Cerrahi Operasyonlar</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Ağız ve Diş Sağlığı</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da İç Hastalıkları</a></li>
+                    <li><a href="hizmetlerimiz.html">Konya'da Fizik Tedavi</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Konya İletişim</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://www.google.com/maps?q=Havzan+Mahallesi,+Yeni+Meram+Caddesi+No:17/1,+Meram/Konya" target="_blank">Havzan Mah. Yeni Meram Cad. 17/1 Meram/Konya</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:03323223220">0332 322 32 20</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a>elcivetklinig@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Pazartesi-Cumartesi: 08:00-19:00<br>Pazar: Acil Hizmet</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Elçi Veteriner Kliniği - Konya. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Acil Arama Butonu -->
+    <div class="emergency-call" id="emergencyCall">
+        <i class="fas fa-phone-alt"></i>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h3>Konya Veteriner Canlı Destek</h3>
+            <button class="close-chat" id="closeChat">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message">
+                <div class="message-content received">
+                    <div class="ai-response">Merhaba! Konya Elçi Veteriner Kliniği'ne hoş geldiniz. Size nasıl yardımcı olabilirim?</div>
+                    <button class="transfer-chat" id="transferWhatsApp">
+                        <i class="fab fa-whatsapp"></i> Canlı Destek İçin WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Mesajınızı yazın...">
+            <button class="send-btn" id="sendMessage">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat Toggle Button -->
+    <div class="chat-toggle" id="chatToggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainMenu.classList.toggle('show');
+        });
+        
+        // Mobile dropdown açma/kapama
+        const dropdownToggles = document.querySelectorAll('#mainMenu .dropdown > a');
+        
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+        
+        // Emergency Call Button
+        const emergencyCall = document.getElementById('emergencyCall');
+        
+        emergencyCall.addEventListener('click', () => {
+            window.location.href = 'tel:03323223220';
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Chat Widget Toggle
+        const chatWidget = document.getElementById('chatWidget');
+        const chatToggle = document.getElementById('chatToggle');
+        const closeChat = document.getElementById('closeChat');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessage = document.getElementById('sendMessage');
+        
+        chatToggle.addEventListener('click', () => {
+            chatWidget.classList.toggle('active');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatWidget.classList.remove('active');
+        });
+        
+        // Chat functionality
+        sendMessage.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, 'sent');
+                chatInput.value = '';
+                
+                // Simulate AI response after a delay
+                setTimeout(() => {
+                    const responses = [
+                        "Anlıyorum, size nasıl yardımcı olabilirim?",
+                        "Bu konuda veteriner hekimimizle görüşmeniz daha doğru olacaktır.",
+                        "Randevu almak için sizi yönlendirebilirim.",
+                        "Lütfen daha fazla detay verebilir misiniz?"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'received');
+                }, 1000);
+            }
+        });
+        
+        function addMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = `message-content ${type}`;
+            contentDiv.textContent = text;
+            
+            messageDiv.appendChild(contentDiv);
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Stats counter animation
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            let count = 0;
+            const duration = 2000; // ms
+            const increment = target / (duration / 16); // 16ms per frame
+            
+            const updateCounter = () => {
+                if (count < target) {
+                    count += increment;
+                    if (count > target) count = target;
+                    stat.textContent = Math.floor(count);
+                    setTimeout(updateCounter, 16);
+                } else {
+                    stat.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements with animations
+        document.querySelectorAll('.section-title h2, .page-header h1, .animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

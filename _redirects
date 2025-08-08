@@ -1,0 +1,14 @@
+# YÖNETİM PANELİ YÖNLENDİRMELERİ
+/admin/dashboard.html  /admin/dashboard.html  200
+/admin_panel.html      /admin_panel.html      200
+
+# DİĞER SAYFALAR
+/index.html            /index.html            200
+/blog.html             /blog.html             200
+/hakkimizda.html       /hakkimizda.html       200
+/hasta_iliskileri.html /hasta_iliskileri.html 200
+/hizmetler.html        /hizmetler.html        200
+/sss.html              /sss.html              200
+
+# TÜM DİĞER İSTEKLER
+/*                     /index.html            200
