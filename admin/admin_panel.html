@@ -1,107 +1,102 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
+    <title>Kolay Yönetim Paneli</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönetim Paneli</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        textarea { width: 100%; height: 300px; margin: 10px 0; }
-        button { padding: 10px 15px; background: #007bff; color: white; border: none; cursor: pointer; }
+        body { font-family: Arial; padding: 20px; }
+        textarea { width: 100%; height: 300px; display: block; margin: 10px 0; }
+        button { padding: 10px 20px; background: #238636; color: white; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Site Yönetim Paneli</h1>
-        
-        <!-- Dosya Seçimi -->
-        <label>Güncellenecek Dosya:</label>
-        <select id="fileSelector">
-            <option value="index.html">Ana Sayfa (index.html)</option>
-            <option value="blog.html">Blog (blog.html)</option>
-            <option value="hizmetler.html">Hizmetler (hizmetler.html)</option>
-            <option value="hakkimizda.html">Hakkımızda (hakkimizda.html)</option>
-            <option value="sss.html">SSS (sss.html)</option>
-        </select>
-        
-        <!-- İçerik Düzenleme -->
-        <textarea id="fileContent" placeholder="Dosya içeriği buraya yapıştırın..."></textarea>
-        
-        <!-- Butonlar -->
-        <button onclick="loadFile()">Dosyayı Yükle</button>
-        <button onclick="updateFile()">Değişiklikleri Kaydet</button>
-        
-        <!-- Sonuç Mesajı -->
-        <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
-    </div>
+    <h1>📝 Site Yönetim Paneli</h1>
+    
+    <!-- 1. KENDİ BİLGİLERİNİ YAZ -->
+    <script>
+        // ⚠️ AŞAĞIDAKİ 3 YERİ DOLDUR ⚠️
+        const TOKEN = "BURAYA_TOKEN_YAPIŞTIR"; // GitHub token'ını buraya yapıştır
+        const REPO = "kullanici_adi/repo_adi"; // Örnek: ahmetkaya/sitem
+        const BRANCH = "main"; // Genelde "main" olur
+    </script>
+
+    <!-- 2. DOSYA SEÇ -->
+    <label>Dosya Seç:</label>
+    <select id="dosyaSec">
+        <option value="index.html">Ana Sayfa</option>
+        <option value="hizmetler.html">Hizmetler</option>
+        <option value="hakkimizda.html">Hakkımızda</option>
+        <option value="blog.html">Blog</option>
+        <option value="sss.html">SSS</option>
+    </select>
+
+    <!-- 3. İÇERİĞİ DÜZENLE -->
+    <textarea id="icerik" placeholder="Buraya içerik yapıştır..."></textarea>
+    
+    <!-- 4. DOSYAYI YÜKLE -->
+    <button onclick="dosyaYukle()">Dosyayı Aç</button>
+    
+    <!-- 5. KAYDET -->
+    <button onclick="kaydet()">Değişiklikleri Kaydet</button>
+    
+    <!-- SONUÇ MESAJI -->
+    <div id="sonuc" style="margin-top:20px; padding:10px; background:#f0f0f0;"></div>
 
     <script>
-        // GitHub Ayarları (BU KISMI KENDİNİZE GÖRE DÜZENLEYİN)
-        const TOKEN = "YOUR_GITHUB_TOKEN";  // GitHub Personal Access Token
-        const REPO = "kullanici_adi/repo_adi";  // GitHub repo adı (örn: johnsmith/website)
-        const BRANCH = "main";  // Varsayılan branch
-
-        // Dosya Yükleme Fonksiyonu
-        async function loadFile() {
-            const filePath = document.getElementById('fileSelector').value;
-            const resultDiv = document.getElementById('result');
+    async function dosyaYukle() {
+        const dosya = document.getElementById('dosyaSec').value;
+        const sonucDiv = document.getElementById('sonuc');
+        
+        try {
+            sonucDiv.innerHTML = "⏳ Dosya yükleniyor...";
+            const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${dosya}?ref=${BRANCH}`, {
+                headers: { Authorization: `token ${TOKEN}` }
+            });
             
-            try {
-                const response = await fetch(
-                    `https://api.github.com/repos/${REPO}/contents/${filePath}?ref=${BRANCH}`,
-                    {
-                        headers: { Authorization: `token ${TOKEN}` }
-                    }
-                );
-                
-                const data = await response.json();
-                const content = atob(data.content);  // Base64 decode
-                document.getElementById('fileContent').value = content;
-                resultDiv.innerHTML = `<p style="color:green">Dosya yüklendi: ${filePath}</p>`;
-            } catch (error) {
-                resultDiv.innerHTML = `<p style="color:red">Hata: ${error.message}</p>`;
-            }
+            const data = await response.json();
+            const icerik = atob(data.content); // Şifreyi çöz
+            document.getElementById('icerik').value = icerik;
+            sonucDiv.innerHTML = "✅ Dosya yüklendi!";
+        } catch (error) {
+            sonucDiv.innerHTML = `❌ Hata: ${error.message}`;
         }
+    }
 
-        // Dosya Güncelleme Fonksiyonu
-        async function updateFile() {
-            const filePath = document.getElementById('fileSelector').value;
-            const content = document.getElementById('fileContent').value;
-            const resultDiv = document.getElementById('result');
+    async function kaydet() {
+        const dosya = document.getElementById('dosyaSec').value;
+        const yeniIcerik = document.getElementById('icerik').value;
+        const sonucDiv = document.getElementById('sonuc');
+        
+        try {
+            sonucDiv.innerHTML = "⏳ Kaydediliyor...";
             
-            try {
-                // SHA değerini al
-                const shaResponse = await fetch(
-                    `https://api.github.com/repos/${REPO}/contents/${filePath}?ref=${BRANCH}`,
-                    { headers: { Authorization: `token ${TOKEN}` } }
-                );
-                const shaData = await shaResponse.json();
-                
-                // Dosyayı güncelle
-                const updateResponse = await fetch(
-                    `https://api.github.com/repos/${REPO}/contents/${filePath}`,
-                    {
-                        method: 'PUT',
-                        headers: {
-                            Authorization: `token ${TOKEN}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: `Yönetim paneli güncellemesi: ${filePath}`,
-                            content: btoa(unescape(encodeURIComponent(content))),  // Base64 encode
-                            sha: shaData.sha,
-                            branch: BRANCH
-                        })
-                    }
-                );
-                
-                const result = await updateResponse.json();
-                resultDiv.innerHTML = `<p style="color:green">Başarılı! Güncellendi: ${result.commit.html_url}</p>`;
-            } catch (error) {
-                resultDiv.innerHTML = `<p style="color:red">Hata: ${error.message}</p>`;
-            }
+            // SHA değerini al
+            const shaResponse = await fetch(`https://api.github.com/repos/${REPO}/contents/${dosya}?ref=${BRANCH}`, {
+                headers: { Authorization: `token ${TOKEN}` }
+            });
+            const shaData = await shaResponse.json();
+            
+            // Güncelleme yap
+            const updateResponse = await fetch(`https://api.github.com/repos/${REPO}/contents/${dosya}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Yönetim paneli güncellemesi: ${dosya}`,
+                    content: btoa(yeniIcerik), // Şifrele
+                    sha: shaData.sha,
+                    branch: BRANCH
+                })
+            });
+            
+            const result = await updateResponse.json();
+            sonucDiv.innerHTML = "✅ Başarıyla kaydedildi!<br>Değişiklikler 1-2 dakika içinde sitede görünecek.";
+        } catch (error) {
+            sonucDiv.innerHTML = `❌ Hata: ${error.message}`;
         }
+    }
     </script>
 </body>
 </html>
