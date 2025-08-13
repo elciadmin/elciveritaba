@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <title>Elçi Veteriner — Yönetim Paneli</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 20px; max-width: 1100px; margin: auto; }
+    header { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom: 10px; }
+    select, input, button { padding:8px; }
+    textarea { width:100%; height:520px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .row { display:grid; grid-template-columns: 1fr auto auto; gap:10px; align-items:center; margin:10px 0; }
+    .muted { color:#666; font-size: 13px;}
+    .ok { color: #1e7a1e }
+    .err { color: #b00020 }
+  </style>
+</head>
+<body>
+  <h1>Yönetim Paneli</h1>
+
+  <header>
+    <label for="filePath">Dosya:</label>
+    <select id="filePath">
+      <option value="index.html">index.html (Ana sayfa)</option>
+      <option value="blog.html">blog.html</option>
+      <option value="hakkimizda.html">hakkimizda.html</option>
+      <option value="hasta_iliskileri.html">hasta_iliskileri.html</option>
+      <option value="hizmetler.html">hizmetler.html</option>
+      <option value="sss.html">sss.html</option>
+    </select>
+
+    <button id="loadBtn">İçeriği Getir</button>
+    <button id="saveBtn">Kaydet ve Yayınla</button>
+  </header>
+
+  <div class="row">
+    <input id="commitMessage" placeholder="Commit mesajı (opsiyonel)" />
+    <span class="muted">Kaydettiğinde GitHub’a commit atılır → GitHub Pages 30–90 sn içinde güncellenir.</span>
+  </div>
+
+  <textarea id="editor" placeholder="Buraya HTML içeriğini yaz / düzenle"></textarea>
+
+  <p id="status" class="muted"></p>
+
+<script>
+  // ← VERCEL API adresin (gerekirse değiştir)
+  const API_BASE = 'https://elciveritaba.vercel.app';
+
+  // GitHub repo bilgilerin:
+  const OWNER = 'elciadmin';
+  const REPO  = 'elciveritaba';
+  const BRANCH = 'main';
+
+  // UTF-8 <-> base64 yardımcıları
+  const enc = (str) => btoa(unescape(encodeURIComponent(str)));   // UTF-8 → base64
+  const dec = (b64) => decodeURIComponent(escape(atob(b64)));     // base64 → UTF-8
+
+  const el = (id) => document.getElementById(id);
+  const setStatus = (msg, cls='') => { const s=el('status'); s.textContent = msg; s.className = cls; };
+
+  // 1) Mevcut içeriği getir (GitHub public API)
+  el('loadBtn').onclick = async () => {
+    const path = el('filePath').value;
+    setStatus('Yükleniyor...');
+    try {
+      const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`);
+      if (!r.ok) throw new Error(await r.text());
+      const data = await r.json();
+      const content = dec(data.content);
+      el('editor').value = content;
+      setStatus('İçerik yüklendi.', 'ok');
+    } catch (e) {
+      setStatus('Hata (yükleme): ' + e.message, 'err');
+    }
+  };
+
+  // 2) Kaydet ve yayınla (Vercel API’ya POST)
+  el('saveBtn').onclick = async () => {
+    const path = el('filePath').value;
+    const html = el('editor').value;
+    const msg  = el('commitMessage').value || `Update ${path} from admin panel`;
+    if (!html.trim()) { setStatus('İçerik boş olamaz.', 'err'); return; }
+
+    setStatus('Kaydediliyor...');
+    try {
+      const r = await fetch(`${API_BASE}/api/update-file`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filePath: path,
+          contentBase64: enc(html),
+          commitMessage: msg
+        })
+      });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error || 'Bilinmeyen hata');
+
+      setStatus('Kaydedildi. 30–90 sn içinde canlı sitede görünür. (Ctrl+F5 ile yenile)', 'ok');
+    } catch (e) {
+      setStatus('Hata (kaydetme): ' + e.message, 'err');
+    }
+  };
+
+  // Sayfa açılınca varsayılan dosyayı yüklemek istersen:
+  // el('loadBtn').click();
+</script>
+</body>
+</html>
